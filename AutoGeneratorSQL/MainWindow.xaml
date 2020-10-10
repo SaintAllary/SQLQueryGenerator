@@ -1,0 +1,60 @@
+﻿<Window x:Class="AutoGeneratorSQL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoGeneratorSQL"
+        mc:Ignorable="d"
+        Title="SQL Data generator" Height="500" Width="800" MinWidth="800" MinHeight="500">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions></Grid.RowDefinitions>
+
+
+        <GroupBox Header="Clipboard" Grid.Column="1"  Margin="5" Height="170" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Name="ClipboardGroup" >
+
+
+
+            <Grid Margin="10,10,10,10">
+                <ComboBox Margin="0"  HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Category}" Name="CategoryBox" SelectedItem="Name" SelectionChanged="CategoryBox_SelectionChanged"></ComboBox>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,30,0,0"  Height="70">
+                    <TextBlock Margin="0,10,0,0" Width="30" HorizontalAlignment="Left">From:</TextBlock>
+                    <TextBox Name="FromBox" Margin="40,10,0,10"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Text="{Binding RangeFrom}"></TextBox>
+                    <TextBlock Margin="0,0,0,10" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom">To:</TextBlock>
+                    <TextBox Name="ToBox" Margin="40,10,0,10"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="20" Text="{Binding RangeTo}"></TextBox>
+
+                </Grid>
+                <CheckBox x:Name="ClipboardState" Content="Active Mode" Margin="0,0,0,-5" Height="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ClipboardState_Click"></CheckBox>
+                <TextBlock  Margin="100,0,0,0" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
+                <TextBlock Width="95" FontSize="10" Name="ClipboardStateBlock" Margin="133,0,0,0"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Enabled</TextBlock>
+                <TextBlock  Margin="0,10,80,0" Width="35" Padding="0" VerticalAlignment="Bottom" HorizontalAlignment="Right">Value:</TextBlock>
+                <TextBlock Width="80"  Padding="0" FontSize="10" Name="ValueClipboardBox" Margin="0,0,0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="DarkGray">NULL</TextBlock>
+                <TextBlock  Margin="0,10,150,0" Width="50" Padding="0" VerticalAlignment="Bottom" HorizontalAlignment="Right">Depends:</TextBlock>
+                <TextBlock Name="DependingBox" Width="25"  Padding="0" FontSize="10"  Margin="0,0,120,0"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="DarkGray">No</TextBlock>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Column="0"  Margin="5" Height="170" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Header="Timer setting">
+            <Grid Margin="0,0,0,0">
+                <Button  Height="21" Margin="0,10,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Top" >Basic setting</Button>
+                <TextBlock Margin="0,50,0,0" Width="45" HorizontalAlignment="Left">Interval:</TextBlock>
+                <TextBlock  Margin="0,10,0,10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
+                <TextBlock Width="70" FontSize="10" Name="TimerState" Margin="35,0,0,10"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Off</TextBlock>
+                <TextBox Name="IntervalBox" Margin="50,50,10,10"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Text="{Binding TimerInterval}" TextChanged="IntervalBox_TextChanged"></TextBox>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="40" Padding="0" Margin="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="Button_Click">Start</Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="40" Padding="0" Margin="10,10,60,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="Button_Click_1" >Stop</Button>
+            </Grid>
+        </GroupBox>
+
+
+        <GroupBox Grid.ColumnSpan="2" Grid.Column="0"  Margin="5" Height="280" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Header="Query Transcriptor">
+           
+        
+        </GroupBox>
+
+
+    </Grid>
+</Window>
