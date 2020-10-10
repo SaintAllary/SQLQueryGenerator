@@ -43,14 +43,11 @@ namespace AutoGeneratorSQL
                 Generator = new DispatcherTimer();
                 Generator.Tick += GenerateValues;
 
-                if (!File.Exists(Properties.Resources.PathToNames))
-                {
-                    throw new Exception("You lost Name.txt file, try to relog");
-                }
-                if (!File.Exists(Properties.Resources.PathToSenames))
-                {
-                    throw new Exception("You lost Sename.txt file, try to relog");
-                }
+                CheckFile(Properties.Resources.PathToNames);
+
+                
+                CheckFile(Properties.Resources.PathToSenames);
+
                 Names = File.ReadAllLines(Properties.Resources.PathToNames);
                 Senames = File.ReadAllLines(Properties.Resources.PathToSenames);
 
@@ -67,6 +64,14 @@ namespace AutoGeneratorSQL
 
 
 
+        }
+
+        private void CheckFile(string FilePath)
+        {
+            if (!File.Exists(FilePath))
+            {
+                throw new Exception($"You lost {FilePath} file, try to relog");
+            }
         }
 
         private void GenerateValues(object sender, EventArgs e)

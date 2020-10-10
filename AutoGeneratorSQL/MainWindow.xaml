@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoGeneratorSQL"
         mc:Ignorable="d"
-        Title="SQL Data generator" Height="500" Width="800" MinWidth="800" MinHeight="500">
+        Title="SQL Data generator" Height="550" Width="800" MinWidth="800" MinHeight="550">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -50,9 +50,26 @@
         </GroupBox>
 
 
-        <GroupBox Grid.ColumnSpan="2" Grid.Column="0"  Margin="5" Height="280" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Header="Query Transcriptor">
-           
-        
+        <GroupBox Grid.ColumnSpan="2" Grid.Column="0"  Margin="5,180,5,5"  Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
+
+            <Grid>
+                <Grid HorizontalAlignment="Stretch" Margin="0,0,260,0" VerticalAlignment="Stretch">
+                    <RichTextBox VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="20" Margin="0,20,0,0"></RichTextBox>
+
+                </Grid>
+                <GroupBox Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="135" Margin="0,0,0,130" Width="250" >
+                    <Grid >
+                        <CheckBox  Content="Log" Margin="5" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" ></CheckBox>
+                        <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5,0,130,28">Clear log</Button>
+                        <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="130,0,5,28">Clear file</Button>
+                        <TextBox HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Top" Margin="50,3,5,0"></TextBox>
+                        <Slider Maximum="100" Minimum="0" TickFrequency="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,35,5,5"></Slider>
+                        <CheckBox  Content="Active Mode" Margin="5,5,5,3" Height="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" ></CheckBox>
+                        <TextBlock  Margin="100,0,0,3" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
+                        <TextBlock Width="110" FontSize="10" Margin="135,0,0,3"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Foreground="DarkGray">Enabled</TextBlock>
+                    </Grid>
+                </GroupBox>
+            </Grid>
         </GroupBox>
 
 
