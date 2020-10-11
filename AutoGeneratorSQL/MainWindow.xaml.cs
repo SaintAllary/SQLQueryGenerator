@@ -81,6 +81,10 @@ namespace AutoGeneratorSQL
             {
                 GenerateClipboardValue();
             }
+            if (QueryMode.IsChecked.Value)
+            {
+                QueryModule();
+            }
         }
 
         private void GenerateClipboardValue()
@@ -315,7 +319,12 @@ namespace AutoGeneratorSQL
         private void ClipboardState_Click(object sender, RoutedEventArgs e)
         {
             if (!ClipboardState.IsChecked.Value)
+            {
                 SetState("Enabled", Colors.DarkGray);
+                SetQueryState("Enabled", Colors.DarkGray);
+  
+            }
+               
             else
             {
                 SetState("On waiting", Colors.DarkOrange);
@@ -343,9 +352,122 @@ namespace AutoGeneratorSQL
                 SetState("Stopped", Colors.DarkOrange);
 
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+
+            #region Test
+
+            //foreach (var item in QueryRTB.Document.Blocks)
+            //{
+            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
+            //    {
+
+            //        TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
+            //    }
+            //    item.Foreground = Brushes.Black;
+            //}
+            //QueryRTB.Foreground = Brushes.Black;
+
+
+
+            //TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //rangeOfText1.Text = "Text1 ";
+            //rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
+            //rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+
+            //TextRange rangeOfWord = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //rangeOfWord.Text = "word ";
+            //rangeOfWord.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
+            //rangeOfWord.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Regular);
+
+            //TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //rangeOfText2.Text = "Text2 ";
+            //rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
+            //rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+
+
+            //QueryRTB.SelectAll();
+
+            //QueryRTB.Selection.Text = "";
+
+
+            //MessageBox.Show(RTBstring);
+
+            //var RTBstring = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
+            //QueryRTB.Document.Blocks.Clear();
+            //foreach (var item in RTBstring.Split(','))
+            //{
+            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
+            //    {
+            //        if (item == inneritem)
+            //        {
+            //            TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //            rangeOfText1.Text = item;
+            //            rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
+            //            rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+
+            //        }
+            //        else
+            //        {
+            //            var RTBstring1 = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
+
+            //            if (RTBstring1.EndsWith(item))
+            //            {
+            //                TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //                rangeOfText1.Text = item;
+            //                rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
+            //                rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
+            //            }
+
+
+
+            //        }
+
+
+
+            //    }
+            //    if (!(new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text.EndsWith(",")))
+            //    {
+            //        TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //        rangeOfText2.Text = ",";
+            //        rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
+            //        rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
+            //    }
+
+
+            //}
+
+
+            #endregion
+
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).IsChecked.Value)
+            {
+                SetQueryState("On waiting..", Colors.DarkOrange);
+                CheckFile();
+
+            }
+            else
+            {
+                SetQuerySavePathState("Enabled", Brushes.DarkGray);
+                SetQueryState("Enabled", Colors.DarkGray);
+            }
+
+        }
         #endregion
 
         #region Optimize
+
+        private void SetQueryState(string value, Color color)
+        {
+            QueryState.Foreground = new SolidColorBrush(color);
+            QueryState.Text = value;
+        }
         private bool BasicCheckValues(string[] value)
         {
             int f, t = 0;
@@ -471,103 +593,38 @@ namespace AutoGeneratorSQL
                
             }
 
-            TextManipulation.FromTextPointer(s.Document.ContentStart, s.Document.ContentEnd, " ", new FontStyle(), FontWeights.Normal, Brushes.Black,null, 12);
-     
-
-            s.Foreground = Brushes.Black;
-
-          
-
-
+            TextManipulation.FromTextPointer(s.Document.ContentStart, s.Document.ContentEnd, " ", new FontStyle(), FontWeights.Normal, Brushes.Black,null, 12); 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+
+        private void SetQuerySavePathState(string str, Brush brushes)
         {
+            QuerySavePathState.Text = str;
+            QuerySavePathState.Foreground = brushes;
+        }
 
+        private void SetState(object sender, TextChangedEventArgs e)
+        {
+            CheckFile();
+        }
 
+        private void CheckFile()
+        {
+            if (!SavePath.Text.EndsWith(".txt") || SavePath.Text.Length > 15)
+                SetQuerySavePathState("Incorrect format of file", Brushes.Red);
+            else if (!File.Exists(SavePath.Text))
+                SetQuerySavePathState("File doesn't exist", Brushes.DarkOrange);
+            else
+                SetQuerySavePathState("File exist", Brushes.Green);
+        }
 
-            //foreach (var item in QueryRTB.Document.Blocks)
-            //{
-            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
-            //    {
-
-            //        TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
-            //    }
-            //    item.Foreground = Brushes.Black;
-            //}
-            //QueryRTB.Foreground = Brushes.Black;
-
-
-
-            //TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //rangeOfText1.Text = "Text1 ";
-            //rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
-            //rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
-
-            //TextRange rangeOfWord = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //rangeOfWord.Text = "word ";
-            //rangeOfWord.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
-            //rangeOfWord.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Regular);
-
-            //TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //rangeOfText2.Text = "Text2 ";
-            //rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
-            //rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
-
-
-            //QueryRTB.SelectAll();
-
-            //QueryRTB.Selection.Text = "";
-
-
-            //MessageBox.Show(RTBstring);
-
-            //var RTBstring = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
-            //QueryRTB.Document.Blocks.Clear();
-            //foreach (var item in RTBstring.Split(','))
-            //{
-            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
-            //    {
-            //        if (item == inneritem)
-            //        {
-            //            TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //            rangeOfText1.Text = item;
-            //            rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
-            //            rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
-
-            //        }
-            //        else
-            //        {
-            //            var RTBstring1 = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
-
-            //            if (RTBstring1.EndsWith(item))
-            //            {
-            //                TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //                rangeOfText1.Text = item;
-            //                rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
-            //                rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
-            //            }
-
-
-
-            //        }
-
-
-
-            //    }
-            //    if (!(new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text.EndsWith(",")))
-            //    {
-            //        TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //        rangeOfText2.Text = ",";
-            //        rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
-            //        rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
-            //    }
-
-
-            //}
-
+        private void QueryModule()
+        {
+            CheckFile();
         }
     }
+
+   
 }
 
 

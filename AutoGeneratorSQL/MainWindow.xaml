@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoGeneratorSQL"
         mc:Ignorable="d"
-        Title="SQL Data generator" Height="550" Width="810" MinWidth="810" MinHeight="550">
+        Title="SQL Data generator" Height="550" Width="870" MinWidth="870" MinHeight="550">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -60,11 +60,11 @@
 
                     <TextBlock  VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="20" Margin="0,40,0,0">Output:</TextBlock>
                     <TextBox VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="20" Margin="45,40,0,0"></TextBox>
-                    <RichTextBox Margin="0,70,0,15" Block.LineHeight="0.1"></RichTextBox>
+                    <TextBox Margin="0,70,0,15" Block.LineHeight="0.1"></TextBox>
                     
                     
                     <TextBlock  Margin="5,0,0,0" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
-                    <TextBlock Width="110" FontSize="10" Margin="43,0,0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Enabled</TextBlock>
+                    <TextBlock Name="QueryState"  Width="110" FontSize="10" Margin="43,0,0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Enabled</TextBlock>
 
                 </Grid>
                 <GroupBox Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="135" Margin="0,0,0,130" Width="250" >
@@ -72,11 +72,11 @@
                         <CheckBox  Content="Log" Margin="5" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" ></CheckBox>
                         <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5,0,130,28">Clear log</Button>
                         <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="130,0,5,28" Click="Button_Click_2">Clear file</Button>
-                        <TextBox HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Top" Margin="50,3,5,0"></TextBox>
+                        <TextBox Name="SavePath" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Top" Margin="50,3,5,0" TextChanged="SetState"></TextBox>
                         <Slider Maximum="100" Minimum="0" TickFrequency="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,35,5,5"></Slider>
-                        <CheckBox  Content="Active Mode" Margin="5,5,5,3" Height="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" ></CheckBox>
+                        <CheckBox Name="QueryMode"   Content="Active Mode" Margin="5,5,5,3" Height="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="CheckBox_Click" ></CheckBox>
                         <TextBlock  Margin="100,0,0,3" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
-                        <TextBlock Width="110" FontSize="10" Margin="135,0,0,3"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Foreground="DarkGray">Enabled</TextBlock>
+                        <TextBlock Name="QuerySavePathState" Width="110" FontSize="10" Margin="135,0,0,3"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Foreground="DarkGray">Enabled</TextBlock>
                       
                     </Grid>
                 </GroupBox>
