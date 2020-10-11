@@ -181,22 +181,25 @@ namespace AutoGeneratorSQL
         #region Creating
         private string CreateRandomPhone()
         {
+            var s = DataContext as ViewModel;
             SuccesesGenerate();
             var r = new Random();
-            var s = $"+{r.Next(0, 10)}{r.Next(0, 10)}({Enum.GetNames(typeof(OperatorsCode))[new Random().Next(0, Enum.GetNames(typeof(OperatorsCode)).Length - 1)].Substring(1, 3)}){r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}";
-            return s;
+            var s1 = $"+{r.Next(0, 10)}{r.Next(0, 10)}({s.OperatorCode[new Random().Next(0, s.OperatorCode.Length - 1)]})" +
+                $"{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}";
+            return s1;
         }
         private string CreateRandomOperator()
         {
             SuccesesGenerate();
+            var s = DataContext as ViewModel;
 
-            if (int.Parse(ToBox.Text) > Enum.GetValues(typeof(Operators)).Length - 1)
+            if (int.Parse(ToBox.Text) > s.Operators.Length - 1)
             {
-                SetState($"Max is { Enum.GetValues(typeof(Operators)).Length - 1}", Colors.DarkOrange);
+                SetState($"Max is { s.Operators.Length - 1}", Colors.DarkOrange);
                 return "NULL";
             }
 
-            return Enum.GetNames(typeof(Operators))[new Random().Next(0, int.Parse(ToBox.Text))];
+            return s.Operators[new Random().Next(0, int.Parse(ToBox.Text))];
         }
         private string CreateRandomAge()
         {

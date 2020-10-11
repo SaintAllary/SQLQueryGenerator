@@ -61,7 +61,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cities.txt.
+        ///   Looks up a localized string similar to City.txt.
         /// </summary>
         internal static string PathToCities {
             get {
@@ -70,7 +70,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Companies.txt.
+        ///   Looks up a localized string similar to Company.txt.
         /// </summary>
         internal static string PathToCompanies {
             get {
@@ -79,7 +79,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Countries.txt.
+        ///   Looks up a localized string similar to Country.txt.
         /// </summary>
         internal static string PathToCountries {
             get {
@@ -88,7 +88,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Names.txt.
+        ///   Looks up a localized string similar to Name.txt.
         /// </summary>
         internal static string PathToNames {
             get {
@@ -97,7 +97,34 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Senames.txt.
+        ///   Looks up a localized string similar to Operator.txt.
+        /// </summary>
+        internal static string PathToOperator {
+            get {
+                return ResourceManager.GetString("PathToOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OperatorCode.txt.
+        /// </summary>
+        internal static string PathToOperatorCode {
+            get {
+                return ResourceManager.GetString("PathToOperatorCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.txt.
+        /// </summary>
+        internal static string PathToPosition {
+            get {
+                return ResourceManager.GetString("PathToPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sename.txt.
         /// </summary>
         internal static string PathToSenames {
             get {
@@ -106,7 +133,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Streets.txt.
+        ///   Looks up a localized string similar to Street.txt.
         /// </summary>
         internal static string PathToStreets {
             get {

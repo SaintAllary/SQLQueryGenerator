@@ -118,22 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PathToCities" xml:space="preserve">
-    <value>Cities.txt</value>
+    <value>City.txt</value>
   </data>
   <data name="PathToCompanies" xml:space="preserve">
-    <value>Companies.txt</value>
+    <value>Company.txt</value>
   </data>
   <data name="PathToCountries" xml:space="preserve">
-    <value>Countries.txt</value>
+    <value>Country.txt</value>
   </data>
   <data name="PathToNames" xml:space="preserve">
-    <value>Names.txt</value>
+    <value>Name.txt</value>
+  </data>
+  <data name="PathToOperator" xml:space="preserve">
+    <value>Operator.txt</value>
+  </data>
+  <data name="PathToOperatorCode" xml:space="preserve">
+    <value>OperatorCode.txt</value>
+  </data>
+  <data name="PathToPosition" xml:space="preserve">
+    <value>Position.txt</value>
   </data>
   <data name="PathToSenames" xml:space="preserve">
-    <value>Senames.txt</value>
+    <value>Sename.txt</value>
   </data>
   <data name="PathToStreets" xml:space="preserve">
-    <value>Streets.txt</value>
+    <value>Street.txt</value>
   </data>
   <data name="SplitterRuleChar" xml:space="preserve">
     <value>;</value>

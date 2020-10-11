@@ -18,7 +18,7 @@ namespace AutoGeneratorSQL
         {
             string final = string.Empty;
 
-            foreach (var item in source.Split())
+            foreach (var item in source.Split(SyntaxSeparator))
             {
 
             }

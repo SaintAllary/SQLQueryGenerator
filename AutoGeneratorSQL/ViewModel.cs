@@ -16,18 +16,12 @@ namespace AutoGeneratorSQL
         public ObservableCollection<string> Category { get; set; }
 
         private string[] countries;
-
         private string[] cities;
-
         private string[] streets;
-
         private string[] companies;
-
-        public string[] Companies
-        {
-            get { return companies; }
-            set { companies = value; OnPropertyChanged("Companies"); }
-        }
+        private string[] operators;
+        private string[] operatorCode;
+    
 
         private string wayToSave;
 
@@ -41,6 +35,22 @@ namespace AutoGeneratorSQL
 
 
         #region Propfull
+        public string[] OperatorCode
+        {
+            get { return operatorCode; }
+            set { operatorCode = value; OnPropertyChanged("OperatorCode"); }
+        }
+        public string[] Operators
+        {
+            get { return operators; }
+            set { operators = value; OnPropertyChanged("Operators"); }
+        }
+        public string[] Companies
+        {
+            get { return companies; }
+            set { companies = value; OnPropertyChanged("Companies"); }
+        }
+
         public string WayToSave
         {
             get { return wayToSave; }
@@ -105,22 +115,20 @@ namespace AutoGeneratorSQL
                 Streets = File.ReadAllLines(Properties.Resources.PathToStreets);
                 Positions = new ObservableCollection<string>();
                 Companies = File.ReadAllLines(Properties.Resources.PathToCompanies);
+                Operators = File.ReadAllLines(Properties.Resources.PathToOperator);
+                OperatorCode = File.ReadAllLines(Properties.Resources.PathToOperatorCode);
 
-                foreach (var item in Enum.GetNames(typeof(Positions)))
-                {
+                foreach (var item in File.ReadAllLines(Properties.Resources.PathToPosition))
                     Positions.Add(item);
-                }
 
                 foreach (var item in Enum.GetNames(typeof(Category)).ToList())
-                {
                     Category.Add(item);
-                }
+
                 RangeTo = 10;
                 TimerInterval = 500;
             }
             catch (Exception EX)
             {
-
                 MessageBox.Show(EX.Message);
             }
 
@@ -134,15 +142,7 @@ namespace AutoGeneratorSQL
 
     }
 
-    enum Positions
-    {
-        Admin,
-        User,
-        Director,
-        Dispetcher
 
-
-    }
 
     enum Category
     {
@@ -159,51 +159,5 @@ namespace AutoGeneratorSQL
         Date
 
     }
-    enum Operators
-    {
-        Vodafone,
-        Kievstar,
-        Life,
-        MTS,
-        Beline,
-        Megafone,
-        Tele2,
-        Yota,
-        Jio,
-        Airtel,
-        Vi,
-        BSNL,
-        Telus,
-        Bell,
-        Rogers,
-        Fido
-
-
-    }
-
-    enum OperatorsCode
-    {
-        V050,
-        V066,
-        V095,
-        V099,
-        K039,
-        K067,
-        K068,
-        K096,
-        K097,
-        K098,
-        L063,
-        L073,
-        L092,
-        L091,
-        L094,
-        L070
-
-
-
-
-    }
-
 
 }
