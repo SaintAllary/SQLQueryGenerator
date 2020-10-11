@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,7 +46,7 @@ namespace AutoGeneratorSQL
 
                 CheckFile(Properties.Resources.PathToNames);
 
-                
+
                 CheckFile(Properties.Resources.PathToSenames);
 
                 Names = File.ReadAllLines(Properties.Resources.PathToNames);
@@ -260,7 +261,7 @@ namespace AutoGeneratorSQL
             var year = new Random().Next(1975, 2004);
             var month = new Random().Next(1, 13);
             SuccesesGenerate();
-          return  $"{year}.{month}.{new Random().Next(0, DateTime.DaysInMonth(year, month))}";
+            return $"{year}.{month}.{new Random().Next(0, DateTime.DaysInMonth(year, month))}";
         }
 
         private string CreateRandomPosition()
@@ -449,9 +450,125 @@ namespace AutoGeneratorSQL
 
             ChangeDependingState();
         }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+    
+            var s = (sender as RichTextBox);
+
+
+            foreach (var item in s.Document.Blocks)
+            {
+                bool f = false;
+                foreach (var inneritem in Enum.GetNames(typeof(Category)))
+                {
+
+                    TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
+                    f = true;
+                }
+                if (f)
+                    break;
+               
+            }
+
+            TextManipulation.FromTextPointer(s.Document.ContentStart, s.Document.ContentEnd, " ", new FontStyle(), FontWeights.Normal, Brushes.Black,null, 12);
+     
+
+            s.Foreground = Brushes.Black;
+
+          
+
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+
+
+            //foreach (var item in QueryRTB.Document.Blocks)
+            //{
+            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
+            //    {
+
+            //        TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
+            //    }
+            //    item.Foreground = Brushes.Black;
+            //}
+            //QueryRTB.Foreground = Brushes.Black;
+
+
+
+            //TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //rangeOfText1.Text = "Text1 ";
+            //rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
+            //rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+
+            //TextRange rangeOfWord = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //rangeOfWord.Text = "word ";
+            //rangeOfWord.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
+            //rangeOfWord.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Regular);
+
+            //TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //rangeOfText2.Text = "Text2 ";
+            //rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
+            //rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+
+
+            //QueryRTB.SelectAll();
+
+            //QueryRTB.Selection.Text = "";
+
+
+            //MessageBox.Show(RTBstring);
+
+            //var RTBstring = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
+            //QueryRTB.Document.Blocks.Clear();
+            //foreach (var item in RTBstring.Split(','))
+            //{
+            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
+            //    {
+            //        if (item == inneritem)
+            //        {
+            //            TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //            rangeOfText1.Text = item;
+            //            rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
+            //            rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+
+            //        }
+            //        else
+            //        {
+            //            var RTBstring1 = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
+
+            //            if (RTBstring1.EndsWith(item))
+            //            {
+            //                TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //                rangeOfText1.Text = item;
+            //                rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
+            //                rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
+            //            }
+
+
+
+            //        }
+
+
+
+            //    }
+            //    if (!(new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text.EndsWith(",")))
+            //    {
+            //        TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
+            //        rangeOfText2.Text = ",";
+            //        rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
+            //        rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
+            //    }
+
+
+            //}
+
+        }
     }
 }
-
 
 
 

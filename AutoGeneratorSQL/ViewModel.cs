@@ -29,6 +29,11 @@ namespace AutoGeneratorSQL
             set { companies = value; OnPropertyChanged("Companies"); }
         }
 
+        private string wayToSave;
+
+     
+
+
 
 
 
@@ -36,7 +41,11 @@ namespace AutoGeneratorSQL
 
 
         #region Propfull
-
+        public string WayToSave
+        {
+            get { return wayToSave; }
+            set { wayToSave = value; OnPropertyChanged("WayToSave"); }
+        }
         public string[] Streets
         {
             get { return streets; }
