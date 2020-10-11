@@ -106,7 +106,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OperatorCode.txt.
+        ///   Looks up a localized string similar to Phone.txt.
         /// </summary>
         internal static string PathToOperatorCode {
             get {

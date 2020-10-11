@@ -20,7 +20,7 @@ namespace AutoGeneratorSQL
         private string[] streets;
         private string[] companies;
         private string[] operators;
-        private string[] operatorCode;
+        private string[] phone;
     
 
         private string wayToSave;
@@ -35,10 +35,10 @@ namespace AutoGeneratorSQL
 
 
         #region Propfull
-        public string[] OperatorCode
+        public string[] Phone
         {
-            get { return operatorCode; }
-            set { operatorCode = value; OnPropertyChanged("OperatorCode"); }
+            get { return phone; }
+            set { phone = value; OnPropertyChanged("Phone"); }
         }
         public string[] Operators
         {
@@ -116,7 +116,7 @@ namespace AutoGeneratorSQL
                 Positions = new ObservableCollection<string>();
                 Companies = File.ReadAllLines(Properties.Resources.PathToCompanies);
                 Operators = File.ReadAllLines(Properties.Resources.PathToOperator);
-                OperatorCode = File.ReadAllLines(Properties.Resources.PathToOperatorCode);
+                Phone = File.ReadAllLines(Properties.Resources.PathToOperatorCode);
 
                 foreach (var item in File.ReadAllLines(Properties.Resources.PathToPosition))
                     Positions.Add(item);

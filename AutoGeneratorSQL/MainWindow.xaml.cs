@@ -184,7 +184,7 @@ namespace AutoGeneratorSQL
             var s = DataContext as ViewModel;
             SuccesesGenerate();
             var r = new Random();
-            var s1 = $"+{r.Next(0, 10)}{r.Next(0, 10)}({s.OperatorCode[new Random().Next(0, s.OperatorCode.Length - 1)]})" +
+            var s1 = $"+{r.Next(0, 10)}{r.Next(0, 10)}({s.Phone[new Random().Next(0, s.Phone.Length - 1)]})" +
                 $"{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}";
             return s1;
         }
