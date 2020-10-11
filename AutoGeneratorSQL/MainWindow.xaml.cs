@@ -65,7 +65,7 @@ namespace AutoGeneratorSQL
 
                 Names = File.ReadAllLines(Properties.Resources.PathToNames);
                 Senames = File.ReadAllLines(Properties.Resources.PathToSenames);
-                SavePath.Text = "Logs\\Log.txt";
+                SavePath.Text = Properties.Resources.PathToFileWithLog;
 
             }
             catch (Exception ex)
@@ -76,14 +76,14 @@ namespace AutoGeneratorSQL
 
 
 
-
+            LogBox.Text = "";
 
 
         }
         private void FileSaver()
         {
             SetQuerySavePathState("File exist", Brushes.Green);
-            File.AppendAllLines(SavePath.Text, new string[]{ OutPutBox.Text});
+            File.AppendAllLines(SavePath.Text, new string[] { OutPutBox.Text });
             LogBox.Text += "----Wrote in file----\n";
             LogBox.SelectionStart = OutputHistory.Text.Length;
             LogBox.ScrollToEnd();
@@ -93,8 +93,14 @@ namespace AutoGeneratorSQL
             try
             {
                 var s = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
+                List<string> words = new List<string>();
 
-                OutPutBox.Text = SyntaxTranscriptor.TranscriptBasicSyntax(s, Convert.ToInt32((SliderPercent.Value)));
+                foreach (var item in (DataContext as ViewModel).Syntaxes)
+                {
+                    words.Add(item.Word);
+                }
+            
+                OutPutBox.Text = SyntaxTranscriptor.Transcript(s, Convert.ToInt32((SliderPercent.Value)), words.ToArray());
 
                 if (OutPutBox.Text.Length - 1 > 0)
                 {
@@ -103,7 +109,7 @@ namespace AutoGeneratorSQL
                     HistoryOutput = OutPutBox.Text + "\n";
 
                     if (HistoryCheck.IsChecked.Value)
-                    FileSaver();
+                        FileSaver();
 
 
                 }
@@ -113,7 +119,7 @@ namespace AutoGeneratorSQL
 
                 LogBox.Text += ex.Message + "\n";
             }
-           
+
 
         }
 
@@ -207,7 +213,7 @@ namespace AutoGeneratorSQL
 
             var s = (sender as RichTextBox);
 
-
+            // basic 
             foreach (var item in s.Document.Blocks)
             {
                 bool f = false;
@@ -215,6 +221,20 @@ namespace AutoGeneratorSQL
                 {
 
                     TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
+                    f = true;
+                }
+                if (f)
+                    break;
+
+            }
+            //custom
+            foreach (var item in s.Document.Blocks)
+            {
+                bool f = false;
+                foreach (var inneritem in (DataContext as ViewModel).Syntaxes)
+                {
+
+                    TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem.Word, item.FontStyle, FontWeights.Bold, new SolidColorBrush(inneritem.color), item.Background, item.FontSize);
                     f = true;
                 }
                 if (f)
@@ -458,7 +478,7 @@ namespace AutoGeneratorSQL
 
                 LogBox.Text += ex.Message + "\n";
             }
-      
+
 
             #region Test
 
@@ -569,11 +589,11 @@ namespace AutoGeneratorSQL
 
         private void SetQuerySavePathState(string str, Brush brushes)
         {
-      
-                QuerySavePathState.Text = str;
-                QuerySavePathState.Foreground = brushes;
-        
-        
+
+            QuerySavePathState.Text = str;
+            QuerySavePathState.Foreground = brushes;
+
+
         }
 
         private void SetState(object sender, TextChangedEventArgs e)
@@ -692,7 +712,6 @@ namespace AutoGeneratorSQL
         }
 
 
-
         #endregion
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -705,6 +724,22 @@ namespace AutoGeneratorSQL
             LogBox.Text += $"Use {Convert.ToInt32(e.NewValue)}% of data\n";
             LogBox.SelectionStart = OutputHistory.Text.Length;
             LogBox.ScrollToEnd();
+        }
+
+        private void GenerateCustom(object sender, RoutedEventArgs e)
+        {
+            SyntaxAdd syntaxAdd = new SyntaxAdd();
+            syntaxAdd.ShowDialog();
+
+            if (syntaxAdd.Executed)
+            {
+    
+                    File.AppendAllLines(Properties.Resources.CustomSyntaxesPath, new string[] { syntaxAdd.WordBox.Text });
+
+                    (DataContext as ViewModel).Syntaxes.Add(new Syntax() { Word = syntaxAdd.WordBox.Text });
+        
+               
+            }
         }
     }
 

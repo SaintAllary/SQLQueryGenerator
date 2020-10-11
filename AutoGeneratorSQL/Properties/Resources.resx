@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CustomSyntaxesPath" xml:space="preserve">
+    <value>CustomSyntaxes.txt</value>
+  </data>
   <data name="Formatter" xml:space="preserve">
     <value>.txt</value>
   </data>
@@ -129,8 +132,14 @@
   <data name="PathToCountries" xml:space="preserve">
     <value>Country.txt</value>
   </data>
+  <data name="PathToCustomDir" xml:space="preserve">
+    <value>Custom</value>
+  </data>
   <data name="PathToDirLog" xml:space="preserve">
     <value>Log</value>
+  </data>
+  <data name="PathToFileWithLog" xml:space="preserve">
+    <value>Logs\Log.txt</value>
   </data>
   <data name="PathToNames" xml:space="preserve">
     <value>Name.txt</value>
@@ -149,6 +158,9 @@
   </data>
   <data name="PathToStreets" xml:space="preserve">
     <value>Street.txt</value>
+  </data>
+  <data name="PathToSyntax" xml:space="preserve">
+    <value>CustomSyntax</value>
   </data>
   <data name="SplitterRuleChar" xml:space="preserve">
     <value>;</value>

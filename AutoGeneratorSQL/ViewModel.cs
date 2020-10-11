@@ -15,6 +15,8 @@ namespace AutoGeneratorSQL
     {
         public ObservableCollection<string> Category { get; set; }
 
+        public ObservableCollection<Syntax> Syntaxes { get; set; }
+
         private string[] countries;
         private string[] cities;
         private string[] streets;
@@ -22,6 +24,7 @@ namespace AutoGeneratorSQL
         private string[] operators;
         private string[] phone;
         private string wayToSave;
+      
 
      
 
@@ -115,6 +118,13 @@ namespace AutoGeneratorSQL
                 Companies = File.ReadAllLines(Properties.Resources.PathToCompanies);
                 Operators = File.ReadAllLines(Properties.Resources.PathToOperator);
                 Phone = File.ReadAllLines(Properties.Resources.PathToOperatorCode);
+                Syntaxes = new ObservableCollection<Syntax>();
+
+                foreach (var item in File.ReadAllLines(Properties.Resources.CustomSyntaxesPath))
+                {
+                    Syntaxes.Add(new Syntax() { Word=  item });
+                }
+             
 
                 foreach (var item in File.ReadAllLines(Properties.Resources.PathToPosition))
                     Positions.Add(item);

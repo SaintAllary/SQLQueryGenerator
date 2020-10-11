@@ -61,6 +61,15 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CustomSyntaxes.txt.
+        /// </summary>
+        internal static string CustomSyntaxesPath {
+            get {
+                return ResourceManager.GetString("CustomSyntaxesPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .txt.
         /// </summary>
         internal static string Formatter {
@@ -97,11 +106,29 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string PathToCustomDir {
+            get {
+                return ResourceManager.GetString("PathToCustomDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         internal static string PathToDirLog {
             get {
                 return ResourceManager.GetString("PathToDirLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logs\Log.txt.
+        /// </summary>
+        internal static string PathToFileWithLog {
+            get {
+                return ResourceManager.GetString("PathToFileWithLog", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace AutoGeneratorSQL.Properties {
         internal static string PathToStreets {
             get {
                 return ResourceManager.GetString("PathToStreets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomSyntax.
+        /// </summary>
+        internal static string PathToSyntax {
+            get {
+                return ResourceManager.GetString("PathToSyntax", resourceCulture);
             }
         }
         

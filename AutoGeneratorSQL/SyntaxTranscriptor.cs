@@ -40,35 +40,57 @@ namespace AutoGeneratorSQL
             #endregion
 
 
-            return GetAnyCategory(category, percent);
+            return GetBasicCategory(category, percent);
         }
-        public static string TranscriptBasicSyntax(string source, int percent)
+        public static string Transcript(string source, int percent, string[] custom)
         {
             string final = string.Empty;
 
             foreach (string item in source.Split(SyntaxSeparator))
             {
                 var trimmed = item.Trim();
-               
+
                 if (Enum.IsDefined(typeof(Category), trimmed))
                     final += $"{GetBasicTranscription(trimmed, percent)},";
+                else 
+                {
+                    if (File.Exists(Properties.Resources.PathToCustomDir + "\\" + trimmed + Properties.Resources.Formatter))
+                    {
+                        if (File.ReadAllLines(Properties.Resources.PathToCustomDir + "\\" + trimmed + Properties.Resources.Formatter).Length == 0)
+                        {
+                            throw new Exception($"Fill your custom file: {trimmed}");
+                        }
+                        final += $"{GetCustomCategory(trimmed, percent)},";
+                    }
+                    
+                }
             }
 
             return final;
         }
 
-        public static string Transcript(string source,int percent, string[] rules)
+
+        private static string GetCustomCategory(string categoryName, int percent)
         {
-            string final = string.Empty;
+            Random random = new Random();
+
+            var path = Properties.Resources.PathToCustomDir + "\\" + categoryName + Properties.Resources.Formatter;
+
+            var s = File.ReadAllLines(path);
+
+
+            double t = (Convert.ToDouble((s.Length)) / 100) * percent;
 
 
 
-            return final;
+
+            return $"'{s[random.Next(0, Convert.ToInt32(t))]}'";
+
+
         }
 
-
         #region General transcriptor Transciptors
-        private static string GetAnyCategory(string categoryName, int percent)
+        private static string GetBasicCategory(string categoryName, int percent)
         {
             Random random = new Random();
             string final = string.Empty;
@@ -77,7 +99,7 @@ namespace AutoGeneratorSQL
             var s = File.ReadAllLines(categoryName + Properties.Resources.Formatter);
 
 
-            double t = (Convert.ToDouble((s.Length - 1)) / 100) * percent;
+            double t = (Convert.ToDouble((s.Length)) / 100) * percent;
 
          
 
