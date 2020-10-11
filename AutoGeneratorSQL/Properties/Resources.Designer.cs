@@ -61,6 +61,15 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .txt.
+        /// </summary>
+        internal static string Formatter {
+            get {
+                return ResourceManager.GetString("Formatter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.txt.
         /// </summary>
         internal static string PathToCities {

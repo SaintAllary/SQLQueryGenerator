@@ -43,6 +43,7 @@ namespace AutoGeneratorSQL
             {
                 Generator = new DispatcherTimer();
                 Generator.Tick += GenerateValues;
+                Generator.Tick += QueryGenerateValues;
 
                 CheckFile(Properties.Resources.PathToNames);
 
@@ -65,6 +66,16 @@ namespace AutoGeneratorSQL
 
 
 
+        }
+
+        private void QueryGenerateValues(object sender, EventArgs e)
+        {
+            var s = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
+        
+            OutPutBox.Text =  SyntaxTranscriptor.TranscriptBasicSyntax(s, Convert.ToInt32((SliderPercent.Value)));
+
+            if (OutPutBox.Text.Length-1 > 0)
+            OutPutBox.Text=  OutPutBox.Text.Remove(OutPutBox.Text.Length - 1, 1);
         }
 
         private void CheckFile(string FilePath)
@@ -143,6 +154,7 @@ namespace AutoGeneratorSQL
             }
 
         }
+     
 
         private void CategoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -332,6 +344,8 @@ namespace AutoGeneratorSQL
             SuccesesGenerate();
             return s[new Random().Next(f, t)];
         }
+
+     
 
 
         #endregion

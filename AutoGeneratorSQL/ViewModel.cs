@@ -21,8 +21,6 @@ namespace AutoGeneratorSQL
         private string[] companies;
         private string[] operators;
         private string[] phone;
-    
-
         private string wayToSave;
 
      
@@ -144,20 +142,6 @@ namespace AutoGeneratorSQL
 
 
 
-    enum Category
-    {
-        Name,
-        Sename,
-        Age,
-        Phone,
-        Operator,
-        Country,
-        City,
-        Street,
-        Company,
-        Position,
-        Date
 
-    }
 
 }
