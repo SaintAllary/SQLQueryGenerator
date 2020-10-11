@@ -97,6 +97,15 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        internal static string PathToDirLog {
+            get {
+                return ResourceManager.GetString("PathToDirLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.txt.
         /// </summary>
         internal static string PathToNames {

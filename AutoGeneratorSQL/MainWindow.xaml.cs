@@ -24,10 +24,10 @@ namespace AutoGeneratorSQL
     public partial class MainWindow : Window
     {
         public DispatcherTimer Generator { get; set; }
+        public string[] Senames { get; set; }
         public bool DoesNeedToStart { get; set; }
 
         public string[] Names { get; set; }
-        public string[] Senames { get; set; }
         private string historyOutput;
 
         public string HistoryOutput
@@ -65,7 +65,7 @@ namespace AutoGeneratorSQL
 
                 Names = File.ReadAllLines(Properties.Resources.PathToNames);
                 Senames = File.ReadAllLines(Properties.Resources.PathToSenames);
-
+                SavePath.Text = "Logs\\Log.txt";
 
             }
             catch (Exception ex)
@@ -80,19 +80,40 @@ namespace AutoGeneratorSQL
 
 
         }
-
+        private void FileSaver()
+        {
+            SetQuerySavePathState("File exist", Brushes.Green);
+            File.AppendAllLines(SavePath.Text, new string[]{ OutPutBox.Text});
+            LogBox.Text += "----Wrote in file----\n";
+            LogBox.SelectionStart = OutputHistory.Text.Length;
+            LogBox.ScrollToEnd();
+        }
         private void QueryGenerateValues()
         {
-            var s = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
-
-            OutPutBox.Text = SyntaxTranscriptor.TranscriptBasicSyntax(s, Convert.ToInt32((SliderPercent.Value)));
-
-            if (OutPutBox.Text.Length - 1 > 0)
+            try
             {
-                OutPutBox.Text = OutPutBox.Text.Remove(OutPutBox.Text.Length - 1, 1);
-                HistoryOutput = OutPutBox.Text + '\n';
+                var s = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
 
+                OutPutBox.Text = SyntaxTranscriptor.TranscriptBasicSyntax(s, Convert.ToInt32((SliderPercent.Value)));
+
+                if (OutPutBox.Text.Length - 1 > 0)
+                {
+                    OutPutBox.Text = OutPutBox.Text.Remove(OutPutBox.Text.Length - 1, 1);
+
+                    HistoryOutput = OutPutBox.Text + "\n";
+
+                    if (HistoryCheck.IsChecked.Value)
+                    FileSaver();
+
+
+                }
             }
+            catch (Exception ex)
+            {
+
+                LogBox.Text += ex.Message + "\n";
+            }
+           
 
         }
 
@@ -206,7 +227,6 @@ namespace AutoGeneratorSQL
 
         private void QueryModule()
         {
-            CheckFile();
             QueryGenerateValues();
         }
 
@@ -427,6 +447,18 @@ namespace AutoGeneratorSQL
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
+            try
+            {
+                File.Exists(SavePath.Text);
+                File.Delete(SavePath.Text);
+                File.Create(SavePath.Text);
+            }
+            catch (Exception ex)
+            {
+
+                LogBox.Text += ex.Message + "\n";
+            }
+      
 
             #region Test
 
@@ -537,8 +569,11 @@ namespace AutoGeneratorSQL
 
         private void SetQuerySavePathState(string str, Brush brushes)
         {
-            QuerySavePathState.Text = str;
-            QuerySavePathState.Foreground = brushes;
+      
+                QuerySavePathState.Text = str;
+                QuerySavePathState.Foreground = brushes;
+        
+        
         }
 
         private void SetState(object sender, TextChangedEventArgs e)
@@ -548,7 +583,7 @@ namespace AutoGeneratorSQL
 
         private void CheckFile()
         {
-            if (!SavePath.Text.EndsWith(".txt") || SavePath.Text.Length > 15)
+            if (!SavePath.Text.EndsWith(Properties.Resources.Formatter) || SavePath.Text.Length > 15)
                 SetQuerySavePathState("Incorrect format of file", Brushes.Red);
             else if (!File.Exists(SavePath.Text))
                 SetQuerySavePathState("File doesn't exist", Brushes.DarkOrange);
@@ -657,9 +692,20 @@ namespace AutoGeneratorSQL
         }
 
 
+
         #endregion
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            LogBox.Text = "";
+        }
 
+        private void WriteToLOG(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            LogBox.Text += $"Use {Convert.ToInt32(e.NewValue)}% of data\n";
+            LogBox.SelectionStart = OutputHistory.Text.Length;
+            LogBox.ScrollToEnd();
+        }
     }
 
 

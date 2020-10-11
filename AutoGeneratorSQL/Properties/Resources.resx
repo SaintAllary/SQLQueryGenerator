@@ -129,6 +129,9 @@
   <data name="PathToCountries" xml:space="preserve">
     <value>Country.txt</value>
   </data>
+  <data name="PathToDirLog" xml:space="preserve">
+    <value>Log</value>
+  </data>
   <data name="PathToNames" xml:space="preserve">
     <value>Name.txt</value>
   </data>
