@@ -144,7 +144,39 @@ namespace AutoGeneratorSQL
 
         }
 
+        private void CategoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+            ChangeDependingState();
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            var s = (sender as RichTextBox);
+
+
+            foreach (var item in s.Document.Blocks)
+            {
+                bool f = false;
+                foreach (var inneritem in Enum.GetNames(typeof(Category)))
+                {
+
+                    TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
+                    f = true;
+                }
+                if (f)
+                    break;
+
+            }
+
+            TextManipulation.FromTextPointer(s.Document.ContentStart, s.Document.ContentEnd, " ", new FontStyle(), FontWeights.Normal, Brushes.Black, null, 12);
+        }
+
+        private void QueryModule()
+        {
+            CheckFile();
+        }
 
         #region Creating
         private string CreateRandomPhone()
@@ -301,12 +333,6 @@ namespace AutoGeneratorSQL
 
         #endregion
 
-
-
-
-
-
-
         #region Clicks
 
 
@@ -343,6 +369,10 @@ namespace AutoGeneratorSQL
             SetTimer();
             DoesNeedToStart = true;
             ChangeTimerState("On", Colors.Green);
+            if (QueryMode.IsChecked.Value)
+            {
+                SetQueryState("On waiting..", Colors.DarkOrange);
+            }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -350,6 +380,10 @@ namespace AutoGeneratorSQL
             ChangeTimerState("Off", Colors.DarkGray);
             if (ClipboardState.IsChecked.Value)
                 SetState("Stopped", Colors.DarkOrange);
+            if (QueryMode.IsChecked.Value)
+            {
+                SetQueryState("Stopped", Colors.DarkOrange);
+            }
 
         }
 
@@ -463,6 +497,27 @@ namespace AutoGeneratorSQL
 
         #region Optimize
 
+
+        private void SetQuerySavePathState(string str, Brush brushes)
+        {
+            QuerySavePathState.Text = str;
+            QuerySavePathState.Foreground = brushes;
+        }
+
+        private void SetState(object sender, TextChangedEventArgs e)
+        {
+            CheckFile();
+        }
+
+        private void CheckFile()
+        {
+            if (!SavePath.Text.EndsWith(".txt") || SavePath.Text.Length > 15)
+                SetQuerySavePathState("Incorrect format of file", Brushes.Red);
+            else if (!File.Exists(SavePath.Text))
+                SetQuerySavePathState("File doesn't exist", Brushes.DarkOrange);
+            else
+                SetQuerySavePathState("File exist", Brushes.Green);
+        }
         private void SetQueryState(string value, Color color)
         {
             QueryState.Foreground = new SolidColorBrush(color);
@@ -567,61 +622,7 @@ namespace AutoGeneratorSQL
 
         #endregion
 
-        private void CategoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ChangeDependingState();
-        }
-
-        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-    
-            var s = (sender as RichTextBox);
-
-
-            foreach (var item in s.Document.Blocks)
-            {
-                bool f = false;
-                foreach (var inneritem in Enum.GetNames(typeof(Category)))
-                {
-
-                    TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
-                    f = true;
-                }
-                if (f)
-                    break;
-               
-            }
-
-            TextManipulation.FromTextPointer(s.Document.ContentStart, s.Document.ContentEnd, " ", new FontStyle(), FontWeights.Normal, Brushes.Black,null, 12); 
-        }
-
-
-        private void SetQuerySavePathState(string str, Brush brushes)
-        {
-            QuerySavePathState.Text = str;
-            QuerySavePathState.Foreground = brushes;
-        }
-
-        private void SetState(object sender, TextChangedEventArgs e)
-        {
-            CheckFile();
-        }
-
-        private void CheckFile()
-        {
-            if (!SavePath.Text.EndsWith(".txt") || SavePath.Text.Length > 15)
-                SetQuerySavePathState("Incorrect format of file", Brushes.Red);
-            else if (!File.Exists(SavePath.Text))
-                SetQuerySavePathState("File doesn't exist", Brushes.DarkOrange);
-            else
-                SetQuerySavePathState("File exist", Brushes.Green);
-        }
-
-        private void QueryModule()
-        {
-            CheckFile();
-        }
+      
     }
 
    

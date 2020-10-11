@@ -113,5 +113,14 @@ namespace AutoGeneratorSQL.Properties {
                 return ResourceManager.GetString("PathToStreets", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ;.
+        /// </summary>
+        internal static string SplitterRuleChar {
+            get {
+                return ResourceManager.GetString("SplitterRuleChar", resourceCulture);
+            }
+        }
     }
 }

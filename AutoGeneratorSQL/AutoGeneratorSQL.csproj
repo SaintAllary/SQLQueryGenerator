@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SyntaxTranscriptor.cs" />
     <Compile Include="TextManipulation.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
