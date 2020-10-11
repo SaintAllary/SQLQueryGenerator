@@ -60,7 +60,7 @@
 
                     <TextBlock  VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="20" Margin="0,40,0,0">Output:</TextBlock>
                     <TextBox Name="OutPutBox" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="20" Margin="45,40,0,0"></TextBox>
-                    <TextBox Margin="0,70,0,15" Block.LineHeight="0.1"></TextBox>
+                    <TextBox TextWrapping="Wrap" Name="OutputHistory"  Margin="0,70,0,15" Block.LineHeight="0.1"></TextBox>
                     
                     
                     <TextBlock  Margin="5,0,0,0" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
@@ -69,10 +69,10 @@
                 </Grid>
                 <GroupBox Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="135" Margin="0,0,0,130" Width="250" >
                     <Grid >
-                        <CheckBox  Content="Log" Margin="5" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" ></CheckBox>
+                        <CheckBox x:Name="HistoryCheck" Content="History" Margin="5" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" ></CheckBox>
                         <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5,0,130,28">Clear log</Button>
                         <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="130,0,5,28" Click="Button_Click_2">Clear file</Button>
-                        <TextBox Name="SavePath" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Top" Margin="50,3,5,0" TextChanged="SetState"></TextBox>
+                        <TextBox Name="SavePath" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Top" Margin="70,3,5,0" TextChanged="SetState"></TextBox>
                         <Slider Name="SliderPercent" Maximum="100" Minimum="0" TickFrequency="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,35,5,5"></Slider>
                         <CheckBox Name="QueryMode"   Content="Active Mode" Margin="5,5,5,3" Height="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="CheckBox_Click" ></CheckBox>
                         <TextBlock  Margin="100,0,0,3" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
