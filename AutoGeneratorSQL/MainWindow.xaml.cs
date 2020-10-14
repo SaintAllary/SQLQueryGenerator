@@ -55,11 +55,10 @@ namespace AutoGeneratorSQL
 
         private void GenerateValues(object sender, EventArgs e)
         {
-            if (QueryMode.IsChecked.Value)
-            {
+
                 QueryModule();
                 SetQueryState("Generating..", Colors.Green);
-            }
+
         }
         public void PostInitialize()
         {
@@ -74,7 +73,6 @@ namespace AutoGeneratorSQL
 
                 Names = File.ReadAllLines(Properties.Resources.PathToNames);
                 Senames = File.ReadAllLines(Properties.Resources.PathToSenames);
-                SavePath.Text = Properties.Resources.PathToFileWithLog;
 
             }
             catch (Exception ex)
@@ -91,9 +89,6 @@ namespace AutoGeneratorSQL
         }
         private void FileSaver()
         {
-            SetQuerySavePathState("File exist", Brushes.Green);
-            File.AppendAllLines(SavePath.Text, new string[] { OutPutBox.Text });
-            LogBox.Text += "----Wrote in file----\n";
             LogBox.SelectionStart = OutputHistory.Text.Length;
             LogBox.ScrollToEnd();
         }
@@ -116,11 +111,6 @@ namespace AutoGeneratorSQL
                     OutPutBox.Text = OutPutBox.Text.Remove(OutPutBox.Text.Length - 1, 1);
 
                     HistoryOutput = OutPutBox.Text + "\n";
-
-                    if (HistoryCheck.IsChecked.Value)
-                        FileSaver();
-
-
                 }
             }
             catch (Exception ex)
@@ -208,114 +198,9 @@ namespace AutoGeneratorSQL
             SetTimer();
             DoesNeedToStart = true;
             ChangeTimerState("On", Colors.Green);
-            if (QueryMode.IsChecked.Value)
-            {
+
                 SetQueryState("On waiting..", Colors.DarkOrange);
-            }
-        }
-     
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-            try
-            {
-                File.Exists(SavePath.Text);
-                File.Delete(SavePath.Text);
-                File.Create(SavePath.Text);
-            }
-            catch (Exception ex)
-            {
-
-                LogBox.Text += ex.Message + "\n";
-            }
-
-
-            #region Test
-
-            //foreach (var item in QueryRTB.Document.Blocks)
-            //{
-            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
-            //    {
-
-            //        TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
-            //    }
-            //    item.Foreground = Brushes.Black;
-            //}
-            //QueryRTB.Foreground = Brushes.Black;
-
-
-
-            //TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //rangeOfText1.Text = "Text1 ";
-            //rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
-            //rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
-
-            //TextRange rangeOfWord = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //rangeOfWord.Text = "word ";
-            //rangeOfWord.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
-            //rangeOfWord.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Regular);
-
-            //TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //rangeOfText2.Text = "Text2 ";
-            //rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
-            //rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
-
-
-            //QueryRTB.SelectAll();
-
-            //QueryRTB.Selection.Text = "";
-
-
-            //MessageBox.Show(RTBstring);
-
-            //var RTBstring = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
-            //QueryRTB.Document.Blocks.Clear();
-            //foreach (var item in RTBstring.Split(','))
-            //{
-            //    foreach (var inneritem in Enum.GetNames(typeof(Category)))
-            //    {
-            //        if (item == inneritem)
-            //        {
-            //            TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //            rangeOfText1.Text = item;
-            //            rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
-            //            rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
-
-            //        }
-            //        else
-            //        {
-            //            var RTBstring1 = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
-
-            //            if (RTBstring1.EndsWith(item))
-            //            {
-            //                TextRange rangeOfText1 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //                rangeOfText1.Text = item;
-            //                rangeOfText1.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
-            //                rangeOfText1.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
-            //            }
-
-
-
-            //        }
-
-
-
-            //    }
-            //    if (!(new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text.EndsWith(",")))
-            //    {
-            //        TextRange rangeOfText2 = new TextRange(QueryRTB.Document.ContentEnd, QueryRTB.Document.ContentEnd);
-            //        rangeOfText2.Text = ",";
-            //        rangeOfText2.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
-            //        rangeOfText2.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
-            //    }
-
-
-            //}
-
-
-            #endregion
-
+ 
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
@@ -323,12 +208,10 @@ namespace AutoGeneratorSQL
             if ((sender as ToggleButton).IsChecked.Value)
             {
                 SetQueryState("On waiting..", Colors.DarkOrange);
-                CheckFile();
 
             }
             else
             {
-                SetQuerySavePathState("Enabled", Brushes.DarkGray);
                 SetQueryState("Enabled", Colors.DarkGray);
             }
 
@@ -337,30 +220,6 @@ namespace AutoGeneratorSQL
 
         #region Optimize
 
-
-        private void SetQuerySavePathState(string str, Brush brushes)
-        {
-
-            QuerySavePathState.Text = str;
-            QuerySavePathState.Foreground = brushes;
-
-
-        }
-
-        private void SetState(object sender, TextChangedEventArgs e)
-        {
-            CheckFile();
-        }
-
-        private void CheckFile()
-        {
-            if (!SavePath.Text.EndsWith(Properties.Resources.Formatter) || SavePath.Text.Length > 15)
-                SetQuerySavePathState("Incorrect format of file", Brushes.Red);
-            else if (!File.Exists(SavePath.Text))
-                SetQuerySavePathState("File doesn't exist", Brushes.DarkOrange);
-            else
-                SetQuerySavePathState("File exist", Brushes.Green);
-        }
         private void SetQueryState(string value, Color color)
         {
             QueryState.Foreground = new SolidColorBrush(color);
@@ -404,23 +263,19 @@ namespace AutoGeneratorSQL
 
         private void GenerateCustom(object sender, RoutedEventArgs e)
         {
-            SyntaxAdd syntaxAdd = new SyntaxAdd();
-            syntaxAdd.ShowDialog();
-
-            if (syntaxAdd.Executed)
+            var s = File.ReadAllLines(Properties.Resources.CustomSyntaxesPath);
+            if (!s.Contains(CustomTextBox.Text.Trim()) && CustomTextBox.Text.Trim().Length >= 3 && CustomTextBox.Text.All(x => char.IsLetter(x)))
             {
-    
-                    File.AppendAllLines(Properties.Resources.CustomSyntaxesPath, new string[] { syntaxAdd.WordBox.Text });
-
-                    (DataContext as ViewModel).Syntaxes.Add(new Syntax() { Word = syntaxAdd.WordBox.Text });
-        
-               
+                File.AppendAllLines(Properties.Resources.CustomSyntaxesPath, new string[] { CustomTextBox.Text.Trim() });
+                (DataContext as ViewModel).Syntaxes.Add(new Syntax() {Word = CustomTextBox.Text.Trim() });
+                CustomTextBox.Text = "";
             }
         }
 
         private void StopTimer(object sender, RoutedEventArgs e)
         {
             ChangeTimerState(Properties.Resources.TimerStopped, Colors.DarkOrange);
+            SetQueryState(Properties.Resources.TimerStopped, Colors.DarkOrange);
             Generator.Stop();
         }
 
