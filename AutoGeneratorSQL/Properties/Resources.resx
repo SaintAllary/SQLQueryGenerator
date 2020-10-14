@@ -165,4 +165,7 @@
   <data name="SplitterRuleChar" xml:space="preserve">
     <value>;</value>
   </data>
+  <data name="TimerStopped" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
 </root>

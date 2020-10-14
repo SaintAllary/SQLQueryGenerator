@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -51,13 +52,21 @@ namespace AutoGeneratorSQL
 
         }
 
+
+        private void GenerateValues(object sender, EventArgs e)
+        {
+            if (QueryMode.IsChecked.Value)
+            {
+                QueryModule();
+                SetQueryState("Generating..", Colors.Green);
+            }
+        }
         public void PostInitialize()
         {
             try
             {
                 Generator = new DispatcherTimer();
                 Generator.Tick += GenerateValues;
-
                 CheckFile(Properties.Resources.PathToNames);
 
 
@@ -131,83 +140,9 @@ namespace AutoGeneratorSQL
             }
         }
 
-        private void GenerateValues(object sender, EventArgs e)
-        {
-            if (ClipboardState.IsChecked.Value)
-            {
-                GenerateClipboardValue();
-            }
-            if (QueryMode.IsChecked.Value)
-            {
-                QueryModule();
-                SetQueryState("Generating..", Colors.Green);
-            }
-        }
-
-        private void GenerateClipboardValue()
-        {
-            //MessageBox.Show(Enum.Parse(typeof(Category), CategoryBox.SelectedItem.ToString()).ToString());
-            string s = string.Empty;
-            int f, t;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (t > f)
-                {
-                    switch (Enum.Parse(typeof(Category), CategoryBox.SelectedItem.ToString()))
-                    {
-                        case Category.Name:
-                            s = CreateRandomName();
-                            break;
-                        case Category.Sename:
-                            s = CreateRandomSename();
-                            break;
-                        case Category.Age:
-                            s = CreateRandomAge();
-                            break;
-                        case Category.Phone:
-                            s = CreateRandomPhone();
-                            break;
-                        case Category.Operator:
-                            s = CreateRandomOperator();
-                            break;
-                        case Category.Country:
-                            s = CreateRandomCountry();
-                            break;
-                        case Category.City:
-                            s = CreateRandomCity();
-                            break;
-                        case Category.Street:
-                            s = CreateRandomStreet();
-                            break;
-                        case Category.Company:
-                            s = CreateRandomCompany();
-                            break;
-                        case Category.Position:
-                            s = CreateRandomPosition();
-                            break;
-                        case Category.Date:
-                            s = CreateRandomDate();
-                            break;
-                        default:
-                            break;
-                    }
-                    Clipboard.SetText(s);
-                    ValueClipboardBox.Text = s;
-                }
-                else
-                    SetState("Invalid range", Colors.Red);
-
-            }
-
-        }
-
-
-        private void CategoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ChangeDependingState();
-        }
-
+     
+      
+       
         private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -227,6 +162,7 @@ namespace AutoGeneratorSQL
                     break;
 
             }
+
             //custom
             foreach (var item in s.Document.Blocks)
             {
@@ -250,166 +186,6 @@ namespace AutoGeneratorSQL
             QueryGenerateValues();
         }
 
-        #region Creating
-        private string CreateRandomPhone()
-        {
-            var s = DataContext as ViewModel;
-            SuccesesGenerate();
-            var r = new Random();
-            var s1 = $"+{r.Next(0, 10)}{r.Next(0, 10)}({s.Phone[new Random().Next(0, s.Phone.Length - 1)]})" +
-                $"{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}{r.Next(0, 10)}";
-            return s1;
-        }
-        private string CreateRandomOperator()
-        {
-            SuccesesGenerate();
-            var s = DataContext as ViewModel;
-
-            if (int.Parse(ToBox.Text) > s.Operators.Length - 1)
-            {
-                SetState($"Max is { s.Operators.Length - 1}", Colors.DarkOrange);
-                return "NULL";
-            }
-
-            return s.Operators[new Random().Next(0, int.Parse(ToBox.Text))];
-        }
-        private string CreateRandomAge()
-        {
-
-            int f = 0;
-            int t = 0;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-                if (f < t)
-                {
-                    SuccesesGenerate();
-                    return new Random().Next(f, t).ToString();
-                }
-
-            SetState("Invalid range", Colors.Red);
-            return string.Empty;
-
-
-        }
-
-        private string CreateRandomName()
-        {
-            int f, t = 0;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(Names))
-                    return "NULL";
-            }
-
-
-            SuccesesGenerate();
-            return Names[new Random().Next(f, t)];
-        }
-
-        private string CreateRandomSename()
-        {
-            int f, t = 0;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(Senames))
-                    return "NULL";
-            }
-
-
-            SuccesesGenerate();
-            return Senames[new Random().Next(f, t)];
-        }
-
-        private string CreateRandomCountry()
-        {
-            int f, t = 0;
-            var s = (DataContext as ViewModel).Countries;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(s))
-                {
-                    return "NULL";
-                }
-            }
-
-
-            SuccesesGenerate();
-            return s[new Random().Next(f, t)];
-        }
-
-        private string CreateRandomCity()
-        {
-            int f, t = 0;
-            var s = (DataContext as ViewModel).Cities;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(s))
-                    return "NULL";
-            }
-
-
-            SuccesesGenerate();
-            return s[new Random().Next(f, t)];
-        }
-        private string CreateRandomStreet()
-        {
-
-            int f, t = 0;
-            var s = (DataContext as ViewModel).Streets;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(s))
-                    return "NULL";
-            }
-
-
-            SuccesesGenerate();
-            return s[new Random().Next(f, t)];
-        }
-
-        private string CreateRandomDate()
-        {
-
-            var year = new Random().Next(1975, 2004);
-            var month = new Random().Next(1, 13);
-            SuccesesGenerate();
-            return $"{year}.{month}.{new Random().Next(0, DateTime.DaysInMonth(year, month))}";
-        }
-
-        private string CreateRandomPosition()
-        {
-            int f, t = 0;
-            var s = (DataContext as ViewModel).Positions;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(s.ToArray()))
-                    return "NULL";
-            }
-
-
-            SuccesesGenerate();
-            return s[new Random().Next(f, t)];
-        }
-
-        private string CreateRandomCompany()
-        {
-            int f, t = 0;
-            var s = (DataContext as ViewModel).Companies;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (!BasicCheckValues(s))
-                    return "NULL";
-            }
-
-
-            SuccesesGenerate();
-            return s[new Random().Next(f, t)];
-        }
-
-
-
-
-        #endregion
-
         #region Clicks
 
 
@@ -419,21 +195,7 @@ namespace AutoGeneratorSQL
             TimerState.Text = value;
         }
 
-        private void ClipboardState_Click(object sender, RoutedEventArgs e)
-        {
-            if (!ClipboardState.IsChecked.Value)
-            {
-                SetState("Enabled", Colors.DarkGray);
-                SetQueryState("Enabled", Colors.DarkGray);
-
-            }
-
-            else
-            {
-                SetState("On waiting", Colors.DarkOrange);
-            }
-        }
-
+     
         private void IntervalBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (DoesNeedToStart)
@@ -451,18 +213,7 @@ namespace AutoGeneratorSQL
                 SetQueryState("On waiting..", Colors.DarkOrange);
             }
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Generator.Stop();
-            ChangeTimerState("Off", Colors.DarkGray);
-            if (ClipboardState.IsChecked.Value)
-                SetState("Stopped", Colors.DarkOrange);
-            if (QueryMode.IsChecked.Value)
-            {
-                SetQueryState("Stopped", Colors.DarkOrange);
-            }
-
-        }
+     
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -569,7 +320,7 @@ namespace AutoGeneratorSQL
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            if ((sender as CheckBox).IsChecked.Value)
+            if ((sender as ToggleButton).IsChecked.Value)
             {
                 SetQueryState("On waiting..", Colors.DarkOrange);
                 CheckFile();
@@ -615,33 +366,8 @@ namespace AutoGeneratorSQL
             QueryState.Foreground = new SolidColorBrush(color);
             QueryState.Text = value;
         }
-        private bool BasicCheckValues(string[] value)
-        {
-            int f, t = 0;
-            if (int.TryParse(FromBox.Text, out f) && int.TryParse(ToBox.Text, out t))
-            {
-                if (int.Parse(ToBox.Text) > value.Length)
-                {
-                    SetState($"Max value is {value.Length}", Colors.Red);
-                    return false;
-                }
-                else if (t < 0 || f < 0)
-                {
-                    SetState($"USE ONLY POSITIVE", Colors.Red);
-                    return false;
-
-                }
-                return true;
-            }
-
-            return false;
-
-        }
-        private void SetState(string value, Color color)
-        {
-            ClipboardStateBlock.Foreground = new SolidColorBrush(color);
-            ClipboardStateBlock.Text = value;
-        }
+       
+      
         private void SetTimer()
         {
             uint t = 0;
@@ -659,58 +385,8 @@ namespace AutoGeneratorSQL
 
             }
         }
-        private void SuccesesGenerate()
-        {
-            SetState("Generating..", Colors.Green);
-        }
-
-        private void SetDepends(string value, Color color)
-        {
-            DependingBox.Foreground = new SolidColorBrush(color);
-            DependingBox.Text = value;
-        }
-        private void ChangeDependingState()
-        {
-            switch (Enum.Parse(typeof(Category), CategoryBox.SelectedItem.ToString()))
-            {
-                case Category.Name:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Sename:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Age:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Phone:
-                    SetDepends("No", Colors.DarkGray);
-                    break;
-                case Category.Operator:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Country:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.City:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Street:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Company:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Position:
-                    SetDepends("Yes", Colors.DarkOrange);
-                    break;
-                case Category.Date:
-                    SetDepends("No", Colors.DarkGray);
-                    break;
-                default:
-                    break;
-            }
-        }
-
+      
+      
 
         #endregion
 
@@ -740,6 +416,17 @@ namespace AutoGeneratorSQL
         
                
             }
+        }
+
+        private void StopTimer(object sender, RoutedEventArgs e)
+        {
+            ChangeTimerState(Properties.Resources.TimerStopped, Colors.DarkOrange);
+            Generator.Stop();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 

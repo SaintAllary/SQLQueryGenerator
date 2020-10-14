@@ -203,5 +203,14 @@ namespace AutoGeneratorSQL.Properties {
                 return ResourceManager.GetString("SplitterRuleChar", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        internal static string TimerStopped {
+            get {
+                return ResourceManager.GetString("TimerStopped", resourceCulture);
+            }
+        }
     }
 }
