@@ -165,6 +165,21 @@
   <data name="SplitterRuleChar" xml:space="preserve">
     <value>;</value>
   </data>
+  <data name="StateEnable" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="StateGenerating" xml:space="preserve">
+    <value>Generating..</value>
+  </data>
+  <data name="StateOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="StateOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="StateoOnWaiting" xml:space="preserve">
+    <value>On waiting..</value>
+  </data>
   <data name="TimerStopped" xml:space="preserve">
     <value>Stopped</value>
   </data>

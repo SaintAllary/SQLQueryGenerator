@@ -57,7 +57,7 @@ namespace AutoGeneratorSQL
         {
 
                 QueryModule();
-                SetQueryState("Generating..", Colors.Green);
+                SetQueryState(Properties.Resources.StateGenerating, Colors.Green);
 
         }
         public void PostInitialize()
@@ -197,9 +197,9 @@ namespace AutoGeneratorSQL
         {
             SetTimer();
             DoesNeedToStart = true;
-            ChangeTimerState("On", Colors.Green);
+            ChangeTimerState(Properties.Resources.StateOn, Colors.Green);
 
-                SetQueryState("On waiting..", Colors.DarkOrange);
+                SetQueryState(Properties.Resources.StateoOnWaiting, Colors.DarkOrange);
  
         }
 
@@ -207,12 +207,12 @@ namespace AutoGeneratorSQL
         {
             if ((sender as ToggleButton).IsChecked.Value)
             {
-                SetQueryState("On waiting..", Colors.DarkOrange);
+                SetQueryState(Properties.Resources.StateoOnWaiting, Colors.DarkOrange);
 
             }
             else
             {
-                SetQueryState("Enabled", Colors.DarkGray);
+                SetQueryState(Properties.Resources.StateEnable, Colors.DarkGray);
             }
 
         }
@@ -238,8 +238,6 @@ namespace AutoGeneratorSQL
                     Generator.Interval = TimeSpan.FromMilliseconds(t);
                     Generator.Start();
                 }
-                else
-                    IntervalBox.Text = "1";
 
 
             }

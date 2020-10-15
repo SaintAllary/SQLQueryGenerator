@@ -205,6 +205,51 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        internal static string StateEnable {
+            get {
+                return ResourceManager.GetString("StateEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generating...
+        /// </summary>
+        internal static string StateGenerating {
+            get {
+                return ResourceManager.GetString("StateGenerating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string StateOff {
+            get {
+                return ResourceManager.GetString("StateOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        internal static string StateOn {
+            get {
+                return ResourceManager.GetString("StateOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On waiting...
+        /// </summary>
+        internal static string StateoOnWaiting {
+            get {
+                return ResourceManager.GetString("StateoOnWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stopped.
         /// </summary>
         internal static string TimerStopped {

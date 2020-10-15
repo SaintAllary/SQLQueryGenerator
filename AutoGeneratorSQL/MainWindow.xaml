@@ -27,7 +27,7 @@
             </GroupBox.HeaderTemplate>
             <Grid>
                 <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Margin="0,5,5,0" Padding="0">Exit</Button>
-                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="0"   Height="170" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="245" Header="Timer setting" Margin="0,194,5,0">
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="0"   Height="170" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="245" Header="Timer setting" Margin="0,6,5,0">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel  Orientation="Horizontal">
@@ -58,7 +58,7 @@
                     <TextBlock Name="QueryState"  Width="110" FontSize="10" Margin="43,0,0,4"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Enabled</TextBlock>
 
                 </Grid>
-                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="184" Margin="0,5,5,0" Width="245"  >
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="184" Margin="0,181,5,0" Width="245"  >
                     <Grid Margin="5" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="29*"/>
