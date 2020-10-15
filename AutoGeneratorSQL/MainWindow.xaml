@@ -14,9 +14,37 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions></Grid.RowDefinitions>
 
-
-
-        <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
+        <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60" Padding="16">
+            <DockPanel>
+                <Button Padding="0"  Margin="-20" Style="{StaticResource MaterialDesignIconForegroundButton}" >
+                    <materialDesign:PackIcon Kind="Menu" Width="35" Height="35" ></materialDesign:PackIcon>
+                </Button>
+                <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="ExitProgram" VerticalAlignment="Center"  DockPanel.Dock="Right" />
+                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
+               
+                    <materialDesign:ColorZone Mode="Standard"  CornerRadius="2"  Panel.ZIndex="1"  Margin="16 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid Width="200">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  Width="Auto" />
+                                <ColumnDefinition  Width="*" />
+                                <ColumnDefinition  Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <!--<Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify"  Opacity=".56" />
+                            </Button>-->
+                            <TextBox x:Name="CustomTextBox"    Grid.Column="1"  Margin="8 0 0 0"   materialDesign:HintAssist.Hint="Your custom query"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"    BorderThickness="0"  MinWidth="200"  VerticalAlignment="Center" />
+                            <Button  Style="{DynamicResource MaterialDesignToolButton}"    Grid.Column="2">
+                                <!--<materialDesign:PackIcon  Kind="Microphone"    Opacity=".56"  Margin="8 0 0 0" />-->
+                            </Button>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Content="Generate" Click="GenerateCustom" Margin="8 0 0 0" Panel.ZIndex="0">
+                
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,61,0,0"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -26,7 +54,7 @@
                 </DataTemplate>
             </GroupBox.HeaderTemplate>
             <Grid>
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Margin="0,5,5,0" Padding="0">Exit</Button>
+           
                 <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="0"   Height="170" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="245" Header="Timer setting" Margin="0,6,5,0">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
@@ -64,7 +92,7 @@
                             <RowDefinition Height="29*"/>
                             <RowDefinition Height="8*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Name="CustomTextBox"  materialDesign:HintAssist.Hint="Your custom query" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,10,0,0"></TextBox>
+                        <TextBox   materialDesign:HintAssist.Hint="Your custom query" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,10,0,0"></TextBox>
 
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="Button_Click_3" Grid.RowSpan="2" Margin="140,0,0,0">Clear log</Button>
                         <Button  Style="{StaticResource MaterialDesignFlatButton}" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,132,0" Click="GenerateCustom" Grid.RowSpan="2">Add custom</Button>

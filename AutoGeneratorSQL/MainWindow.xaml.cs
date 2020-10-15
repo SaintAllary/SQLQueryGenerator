@@ -281,6 +281,11 @@ namespace AutoGeneratorSQL
         {
             DragMove();
         }
+
+        private void ExitProgram(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 
 
