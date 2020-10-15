@@ -25,12 +25,8 @@ namespace AutoGeneratorSQL
     public partial class MainWindow : Window
     {
         public DispatcherTimer Generator { get; set; }
-        public string[] Senames { get; set; }
         public bool DoesNeedToStart { get; set; }
-
-        public string[] Names { get; set; }
         private string historyOutput;
-
         public string HistoryOutput
         {
             get { return historyOutput; }
@@ -65,19 +61,11 @@ namespace AutoGeneratorSQL
             try
             {
                 Generator = new DispatcherTimer();
-                Generator.Tick += GenerateValues;
-                CheckFile(Properties.Resources.PathToNames);
+                Generator.Tick += GenerateValues;       }
 
 
-                CheckFile(Properties.Resources.PathToSenames);
-
-                Names = File.ReadAllLines(Properties.Resources.PathToNames);
-                Senames = File.ReadAllLines(Properties.Resources.PathToSenames);
-
-            }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
 
@@ -87,11 +75,7 @@ namespace AutoGeneratorSQL
 
 
         }
-        private void FileSaver()
-        {
-            LogBox.SelectionStart = OutputHistory.Text.Length;
-            LogBox.ScrollToEnd();
-        }
+
         private void QueryGenerateValues()
         {
             try
@@ -160,7 +144,7 @@ namespace AutoGeneratorSQL
                 foreach (var inneritem in (DataContext as ViewModel).Syntaxes)
                 {
 
-                    TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem.Word, item.FontStyle, FontWeights.Bold, new SolidColorBrush(inneritem.color), item.Background, item.FontSize);
+                    TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem.Word, item.FontStyle, FontWeights.Bold, new SolidColorBrush(inneritem.Color), item.Background, item.FontSize);
                     f = true;
                 }
                 if (f)

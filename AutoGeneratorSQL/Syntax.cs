@@ -10,7 +10,7 @@ namespace AutoGeneratorSQL
 {
     class Syntax
     {
-        public Color color { get; set; }
+        public Color Color { get; set; }
 
         private string word;
 
@@ -18,17 +18,17 @@ namespace AutoGeneratorSQL
         {
             get { 
                 if (!File.Exists(Properties.Resources.PathToCustomDir + "\\" + word + Properties.Resources.Formatter))
-                    color = Colors.DarkGray;
+                    Color = Colors.DarkGray;
                 else
-                    color = Colors.DarkOrange;
+                    Color = Colors.DarkOrange;
                 return word;
             }
             set {
                 word = value;
                 if (!File.Exists(Properties.Resources.PathToCustomDir + "\\"+ word+Properties.Resources.Formatter))
-                    color = Colors.DarkGray;
+                    Color = Colors.DarkGray;
                 else
-                    color = Colors.DarkOrange;
+                    Color = Colors.DarkOrange;
 
             }
         }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AutoGeneratorSQL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="SQL Data generator" Height="570" Width="870" MinWidth="870" MinHeight="550" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown">
+        Title="SQL Data generator" AllowsTransparency="True" Height="570" Width="870" MinWidth="870" MinHeight="550" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -14,14 +14,14 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions></Grid.RowDefinitions>
 
-        <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60" Padding="16">
+        <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60"  Padding="16">
             <DockPanel>
                 <Button Padding="0"  Margin="-20" Style="{StaticResource MaterialDesignIconForegroundButton}" >
                     <materialDesign:PackIcon Kind="Menu" Width="35" Height="35" ></materialDesign:PackIcon>
                 </Button>
-                <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="ExitProgram" VerticalAlignment="Center"  DockPanel.Dock="Right" />
+                <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,10,0" Click="ExitProgram" VerticalAlignment="Center"  DockPanel.Dock="Right" />
                 <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
-               
+
                     <materialDesign:ColorZone Mode="Standard"  CornerRadius="2"  Panel.ZIndex="1"  Margin="16 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <Grid Width="200">
                             <Grid.ColumnDefinitions>
@@ -39,12 +39,12 @@
                         </Grid>
                     </materialDesign:ColorZone>
                     <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Content="Generate" Click="GenerateCustom" Margin="8 0 0 0" Panel.ZIndex="0">
-                
+
                     </Button>
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,61,0,0"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
+        <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,62,0,0"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -54,7 +54,7 @@
                 </DataTemplate>
             </GroupBox.HeaderTemplate>
             <Grid>
-           
+
                 <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="0"   Height="170" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="245" Header="Timer setting" Margin="0,6,5,0">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
@@ -78,11 +78,11 @@
                 <TextBox x:Name="LogBox" x:FieldModifier="public" Width="245" Block.LineHeight="0.1"  HorizontalAlignment="Right" VerticalAlignment="Stretch"  Margin="0,369,5,20"></TextBox>
                 <Grid HorizontalAlignment="Stretch" Margin="0,0,260,0" VerticalAlignment="Stretch">
                     <RichTextBox materialDesign:HintAssist.Hint="Your query" Name="QueryRTB"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,10,0,0" TextChanged="RichTextBox_TextChanged" AcceptsReturn="False"></RichTextBox>
-                    <TextBox  materialDesign:HintAssist.Hint="Output value" Name="OutPutBox" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,40,0,0"></TextBox>
+                    <TextBox  materialDesign:HintAssist.Hint="Output value" Foreground="{StaticResource MaterialDesignDarkForeground}" Name="OutPutBox" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,40,0,0"></TextBox>
                     <TextBox  TextWrapping="Wrap" Name="OutputHistory"  Margin="10,70,0,20" Block.LineHeight="0.1"></TextBox>
 
 
-                    <TextBlock  Margin="10,0,0,4" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
+                    <TextBlock Foreground="{StaticResource PrimaryHueMidBrush}" Margin="10,0,0,4" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">State:</TextBlock>
                     <TextBlock Name="QueryState"  Width="110" FontSize="10" Margin="43,0,0,4"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Enabled</TextBlock>
 
                 </Grid>
@@ -92,10 +92,13 @@
                             <RowDefinition Height="29*"/>
                             <RowDefinition Height="8*"/>
                         </Grid.RowDefinitions>
-                        <TextBox   materialDesign:HintAssist.Hint="Your custom query" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,10,0,0"></TextBox>
 
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="Button_Click_3" Grid.RowSpan="2" Margin="140,0,0,0">Clear log</Button>
-                        <Button  Style="{StaticResource MaterialDesignFlatButton}" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,132,0" Click="GenerateCustom" Grid.RowSpan="2">Add custom</Button>
+
+                        <Grid  HorizontalAlignment="Stretch" Height="19" Width="150" VerticalAlignment="Bottom" Margin="0,0,132,0" Grid.RowSpan="2" >
+                            <TextBlock Text="Full" Width="55" HorizontalAlignment="Left" Foreground="{StaticResource PrimaryHueMidBrush}" Margin="10,0,0,0"></TextBlock>
+                            <ToggleButton HorizontalAlignment="Right" Width="58" Margin="0,0,68,0" Padding="0"></ToggleButton>
+                        </Grid>
 
                         <Slider Name="SliderPercent" Value="100" Maximum="100" Minimum="0" TickFrequency="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,67,0,0" ValueChanged="WriteToLOG"/>
 
