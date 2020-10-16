@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace AutoGeneratorSQL
 {
@@ -16,12 +17,14 @@ namespace AutoGeneratorSQL
 
         public ObservableCollection<Syntax> Syntaxes { get; set; }
 
- 
+        public ObservableCollection<Syntax> BasicSyntaxes { get; set; }
+
+
 
 
 
         #region Propfull
-    
+
 
 
         private uint timerInterval;
@@ -39,6 +42,13 @@ namespace AutoGeneratorSQL
             try
             {
 
+               
+                BasicSyntaxes = new ObservableCollection<Syntax>();
+
+                foreach (var item in Enum.GetNames( typeof(BasicSyntax)))
+                {
+                    BasicSyntaxes.Add(new Syntax() { Word = item , Color = Colors.White});
+                }
 
                 Syntaxes = new ObservableCollection<Syntax>();
 
