@@ -12,13 +12,13 @@ namespace AutoGeneratorSQL
 {
     static class SyntaxTranscriptor
     {
+        private static RNGCryptoServiceProvider _RNG = new RNGCryptoServiceProvider();
         static char SyntaxSeparator;
         static SyntaxTranscriptor()
         {
             SyntaxSeparator = ',';
         }
 
-        private static RNGCryptoServiceProvider _RNG = new RNGCryptoServiceProvider();
 
         private static int GetNextRnd(int min, int max)
         {
@@ -30,7 +30,6 @@ namespace AutoGeneratorSQL
             Decimal NewValue = ((Decimal)rand - (Decimal)int.MinValue) / OldRange * NewRange + (Decimal)min;
             return (int)NewValue;
         }
-
         public static string GetBasicTranscription(string category, int percent)
         {
             #region special cases
@@ -84,10 +83,7 @@ namespace AutoGeneratorSQL
 
             return final;
         }
-
         public static bool DoesAnySyntaxExist(string CustomWord) => Enum.IsDefined(typeof(BasicSyntax), CustomWord);
-
-
         private static string GetCustomCategory(string categoryName, int percent)
         {
             Random random = new Random();
@@ -107,26 +103,17 @@ namespace AutoGeneratorSQL
 
         }
 
-        #region General transcriptor Transciptors
+        #region General transcriptor
         private static string GetBasicCategory(string categoryName, int percent)
         {
-            Random random = new Random();
-            string final = string.Empty;
-
-
-            var s = File.ReadAllLines(categoryName + Properties.Resources.Formatter);
-
+            var s = File.ReadAllLines(Properties.Resources.PathToDirBasic+"\\" +categoryName + Properties.Resources.Formatter);
 
             double t = (Convert.ToDouble((s.Length)) / 100) * percent;
-
-
-
 
             return $"'{s[GetNextRnd(0, Convert.ToInt32(t))]}'";
 
 
         }
-
         public static string GetFullFirstPart(string sourceString, string currentTable, List<string>customWords)
         {
             string tmp = $"INRSERT INTO [{currentTable}] (";
@@ -145,7 +132,6 @@ namespace AutoGeneratorSQL
             tmp += ") VALUES "; ;
             return tmp;
         }
-
         public static string GetFullSecondPart(string firstPart, string values) => firstPart + $"({values});";
 
         #endregion
@@ -163,8 +149,7 @@ namespace AutoGeneratorSQL
         Company,
         Position,
         Date,
-        Money
-
-
+        Money,
+        Password
     }
 }

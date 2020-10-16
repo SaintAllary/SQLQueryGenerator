@@ -124,6 +124,15 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basic.
+        /// </summary>
+        internal static string PathToDirBasic {
+            get {
+                return ResourceManager.GetString("PathToDirBasic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         internal static string PathToDirLog {
