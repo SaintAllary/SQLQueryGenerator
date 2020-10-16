@@ -10,9 +10,6 @@
     <Window.Resources>
 
         <Style x:Key="MenuButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconForegroundButton}" >
-
-
-
         </Style>
 
         <Style x:Key="Animation" TargetType="materialDesign:Card">
