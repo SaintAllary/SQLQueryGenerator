@@ -121,7 +121,7 @@
     <value>CustomSyntaxes.txt</value>
   </data>
   <data name="ExceptionNameRule" xml:space="preserve">
-    <value>Table name must be:\n1)Not less than 3 letters\n2)Only letters</value>
+    <value>Table name must be: 1)Not less than 3 letters 2)Only letters</value>
   </data>
   <data name="Formatter" xml:space="preserve">
     <value>.txt</value>

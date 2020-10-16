@@ -9,18 +9,64 @@
         Title="SQL Data generator" AllowsTransparency="True" Height="570" Width="870" MinWidth="870" MinHeight="550" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown">
     <Window.Resources>
 
+        <Style x:Key="MenuButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconForegroundButton}" >
+
+
+
+        </Style>
+
+        <Style x:Key="Animation" TargetType="materialDesign:Card">
+            <Style.Triggers>
+
+                <EventTrigger RoutedEvent="materialDesign:Card.MouseEnter">
+                    <BeginStoryboard x:Name="Story_True">
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,70,0" AutoReverse="False" />
+                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="150" AutoReverse="False" />
+                            <DoubleAnimation  Storyboard.TargetProperty="Opacity"  From="0" To="1" Duration="0:0:0.1" AutoReverse="False"  />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="materialDesign:Card.MouseLeave">
+                    <BeginStoryboard x:Name="Story_false">
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,0,0" AutoReverse="False" />
+                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="1" AutoReverse="False" />
+                            <DoubleAnimation  Storyboard.TargetProperty="Opacity"  From="1" To="0" Duration="0:0:0.1" AutoReverse="False"  />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions></Grid.RowDefinitions>
 
+        <materialDesign:Card UniformCornerRadius="0" Background="{DynamicResource PrimaryHueMidBrush  }" Margin="0,0,0,0" Opacity="0" HorizontalAlignment="Left" Width="7" 
+                             VerticalAlignment="Stretch" Panel.ZIndex="1" Style="{StaticResource Animation}"  >
+            <ListBox ItemsSource="{Binding Syntaxes}" Padding="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch" >
+
+                            <TextBlock Margin="-5,0,0,0" Padding="0" HorizontalAlignment="Stretch" Text="{Binding Path=Word}" Style="{StaticResource MaterialDesignTextBlock}" 
+                                       Background="Transparent" Foreground="{Binding Path=Brush}"></TextBlock>
+                        </Grid>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+        </materialDesign:Card>
         
         <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60"  Padding="16">
             <DockPanel>
-                <Button   Padding="0"  Margin="-20" Style="{StaticResource MaterialDesignIconForegroundButton}" >
+                <Button   Padding="0"  Margin="-20" Style="{StaticResource MenuButton}" >
                     <materialDesign:PackIcon Kind="Menu" Width="35" Height="35" ></materialDesign:PackIcon>
                 </Button>
                 <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,10,0" Click="ExitProgram" VerticalAlignment="Center"  DockPanel.Dock="Right" />
@@ -33,12 +79,8 @@
                                 <ColumnDefinition  Width="*" />
                                 <ColumnDefinition  Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <!--<Button Style="{DynamicResource MaterialDesignToolButton}">
-                                <materialDesign:PackIcon Kind="Magnify"  Opacity=".56" />
-                            </Button>-->
                             <TextBox x:Name="CustomTextBox"    Grid.Column="1"  Margin="8 0 0 0"   materialDesign:HintAssist.Hint="Your custom query"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"    BorderThickness="0"  MinWidth="200"  VerticalAlignment="Center" />
                             <Button  Style="{DynamicResource MaterialDesignToolButton}"    Grid.Column="2">
-                                <!--<materialDesign:PackIcon  Kind="Microphone"    Opacity=".56"  Margin="8 0 0 0" />-->
                             </Button>
                         </Grid>
                     </materialDesign:ColorZone>
@@ -48,7 +90,7 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,62,0,0"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
+        <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0" Margin="2,62,2,2"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -59,7 +101,7 @@
             </GroupBox.HeaderTemplate>
             <Grid>
 
-                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="0"   Height="170" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="245" Header="Timer setting" Margin="0,6,5,0">
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="0"   Height="170" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="245" Header="Timer setting" Margin="0,6,2,0">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel  Orientation="Horizontal">
@@ -82,7 +124,7 @@
                 <TextBox x:Name="LogBox" x:FieldModifier="public" Width="245" Block.LineHeight="0.1"  HorizontalAlignment="Right" VerticalAlignment="Stretch"  Margin="0,369,5,20"></TextBox>
                 <Grid HorizontalAlignment="Stretch" Margin="0,0,260,0" VerticalAlignment="Stretch">
                     <RichTextBox materialDesign:HintAssist.Hint="Your query" Name="QueryRTB"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,10,0,0" TextChanged="RichTextBox_TextChanged" AcceptsReturn="False"></RichTextBox>
-                    <TextBox  materialDesign:HintAssist.Hint="Output value" Foreground="{StaticResource MaterialDesignDarkForeground}" Name="OutPutBox" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,40,0,0"></TextBox>
+                    <TextBox  materialDesign:HintAssist.Hint="Output value"  Name="OutPutBox" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,40,0,0"></TextBox>
                     <TextBox  TextWrapping="Wrap" Name="OutputHistory"  Margin="10,70,0,20" Block.LineHeight="0.1"></TextBox>
 
 
@@ -90,7 +132,7 @@
                     <TextBlock Name="QueryState"  Width="110" FontSize="10" Margin="43,0,0,4"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="DarkGray">Enabled</TextBlock>
 
                 </Grid>
-                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="184" Margin="0,181,5,0" Width="245"  >
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Modifiers" HorizontalAlignment="Right" VerticalAlignment="Top" Height="184" Margin="0,181,2,0" Width="245"  >
                     <Grid Margin="5" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="29*"/>

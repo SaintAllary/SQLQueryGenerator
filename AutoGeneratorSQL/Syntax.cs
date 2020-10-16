@@ -10,7 +10,32 @@ namespace AutoGeneratorSQL
 {
     class Syntax
     {
-        public Color Color { get; set; }
+        //public Color Color { get; set; }
+
+
+        private Color color;
+
+        public Color Color
+        {
+            get {
+                Brush = new SolidColorBrush(color);
+                return color; }
+            set {
+             
+                color = value;
+                Brush = new SolidColorBrush(color);
+            }
+        }
+
+
+        private Brush brush;
+
+        public Brush Brush
+        {
+            get { return brush; }
+            set { brush = value; }
+        }
+
 
         private string word;
 

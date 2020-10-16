@@ -107,11 +107,10 @@ namespace AutoGeneratorSQL
 
                 OutPutBox.Text = values;
 
-                if (OutPutBox.Text.Length - 1 > 0)
-                {
 
-                    HistoryOutput = OutPutBox.Text + "\n";
-                }
+
+                HistoryOutput = OutPutBox.Text + "\n";
+
             }
             catch (Exception ex)
             {
@@ -270,13 +269,34 @@ namespace AutoGeneratorSQL
 
         private void GenerateCustom(object sender, RoutedEventArgs e)
         {
-            var s = File.ReadAllLines(Properties.Resources.CustomSyntaxesPath);
-            if (!s.Contains(CustomTextBox.Text.Trim()) && CustomTextBox.Text.Trim().Length >= 3 && CustomTextBox.Text.All(x => char.IsLetter(x)))
+
+            int ruleLess = 10;
+            int ruleMoreThan = 3;
+            try
             {
-                File.AppendAllLines(Properties.Resources.CustomSyntaxesPath, new string[] { CustomTextBox.Text.Trim() });
-                (DataContext as ViewModel).Syntaxes.Add(new Syntax() {Word = CustomTextBox.Text.Trim() });
-                CustomTextBox.Text = "";
+                var s = File.ReadAllLines(Properties.Resources.CustomSyntaxesPath);
+                if (!s.Contains(CustomTextBox.Text.Trim()) && CustomTextBox.Text.Trim().Length >= ruleMoreThan && CustomTextBox.Text.All(x => char.IsLetter(x) && CustomTextBox.Text.Trim().Length <= ruleLess))
+                {
+                    File.AppendAllLines(Properties.Resources.CustomSyntaxesPath, new string[] { CustomTextBox.Text.Trim() });
+                    (DataContext as ViewModel).Syntaxes.Add(new Syntax() { Word = CustomTextBox.Text.Trim() });
+                    CustomTextBox.Text = "";
+                }
+                else
+                    throw new Exception("---Invalid value---\nAll letters and not repeated\nNeed more than {ruleMoreThan}\nLess than {ruleLess}");
             }
+            catch (Exception ex)
+            {
+
+                Logger(ex);
+            }
+          
+        }
+
+        private void Logger(Exception exception)
+        {
+            LogBox.Text += exception.Message + "\n";
+            LogBox.SelectionStart = OutputHistory.Text.Length;
+            LogBox.ScrollToEnd();
         }
 
         private void StopTimer(object sender, RoutedEventArgs e)
@@ -288,7 +308,11 @@ namespace AutoGeneratorSQL
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+          
         }
 
         private void ExitProgram(object sender, RoutedEventArgs e)

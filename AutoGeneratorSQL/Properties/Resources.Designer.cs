@@ -70,7 +70,7 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table name must be:\n1)Not less than 3 letters\n2)Only letters.
+        ///   Looks up a localized string similar to Table name must be: 1)Not less than 3 letters 2)Only letters.
         /// </summary>
         internal static string ExceptionNameRule {
             get {
