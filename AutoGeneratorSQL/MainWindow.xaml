@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AutoGeneratorSQL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="SQL Data generator" AllowsTransparency="True" Height="570" Width="870" MinWidth="870" MinHeight="550" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown">
+        Title="SQL Data generator" AllowsTransparency="True" Height="600" Width="1100" MinWidth="1100" MinHeight="600" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown">
     <Window.Resources>
 
         <Style x:Key="MenuButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconForegroundButton}" >
