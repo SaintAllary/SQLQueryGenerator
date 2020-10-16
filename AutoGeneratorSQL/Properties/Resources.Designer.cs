@@ -70,6 +70,15 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table name must be:\n1)Not less than 3 letters\n2)Only letters.
+        /// </summary>
+        internal static string ExceptionNameRule {
+            get {
+                return ResourceManager.GetString("ExceptionNameRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .txt.
         /// </summary>
         internal static string Formatter {

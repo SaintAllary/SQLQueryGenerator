@@ -93,9 +93,9 @@ namespace AutoGeneratorSQL
                 if (DoesFullRequestToggle.IsChecked.Value)
                 {
                     if (!TableNameBox.Text.All(x=>char.IsLetter(x)) || TableNameBox.Text.Length<=3)
-                    {
-                        throw new Exception("Table name must be:\n1)Not less than 3 letters\n2)Only letters");
-                    }
+                        throw new Exception(Properties.Resources.ExceptionNameRule);
+
+
                     List<string> vs = new List<string>();
                     foreach (var item in (DataContext as ViewModel).Syntaxes)
                     {
