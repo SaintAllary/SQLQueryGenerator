@@ -34,15 +34,15 @@ namespace AutoGeneratorSQL
         public static string GetBasicTranscription(string category, int percent)
         {
             #region special cases
-            if (category == Category.Age.ToString())
+            if (category == BasicSyntax.Age.ToString())
                 return GetNextRnd(0, percent).ToString();
-            else if (category == Category.Date.ToString())
+            else if (category == BasicSyntax.Date.ToString())
             {
                 var year = GetNextRnd(1975, 2004);
                 var month = GetNextRnd(1, 13);
                 return $"{year}.{month}.{GetNextRnd(0, DateTime.DaysInMonth(year, month))}";
             }
-            else if (category == Category.Phone.ToString())
+            else if (category == BasicSyntax.Phone.ToString())
             {
                 var s = File.ReadAllLines(category + Properties.Resources.Formatter);
                 double t = (Convert.ToDouble((s.Length - 1)) / 100) * percent;
@@ -51,6 +51,8 @@ namespace AutoGeneratorSQL
                     $"{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}";
                 return s1;
             }
+            else if (category == BasicSyntax.Money.ToString())
+                return (Convert.ToDouble(GetNextRnd(0,int.MaxValue/10000) / 100) * (percent>0? percent:1)).ToString();
             #endregion
 
 
@@ -64,7 +66,7 @@ namespace AutoGeneratorSQL
             {
                 var trimmed = item.Trim();
 
-                if (Enum.IsDefined(typeof(Category), trimmed))
+                if (Enum.IsDefined(typeof(BasicSyntax), trimmed))
                     final += $"{GetBasicTranscription(trimmed, percent)},";
                 else
                 {
@@ -83,7 +85,7 @@ namespace AutoGeneratorSQL
             return final;
         }
 
-        public static bool DoesAnySyntaxExist(string CustomWord) => Enum.IsDefined(typeof(Category), CustomWord);
+        public static bool DoesAnySyntaxExist(string CustomWord) => Enum.IsDefined(typeof(BasicSyntax), CustomWord);
 
 
         private static string GetCustomCategory(string categoryName, int percent)
@@ -133,7 +135,7 @@ namespace AutoGeneratorSQL
             {
                 var s = item.Trim();
    
-                if (Enum.IsDefined(typeof(Category), s) || customWords.Contains(s))
+                if (Enum.IsDefined(typeof(BasicSyntax), s) || customWords.Contains(s))
                 {
                     tmp += $"[{s}],";
 
@@ -148,7 +150,7 @@ namespace AutoGeneratorSQL
 
         #endregion
     }
-    enum Category
+    enum BasicSyntax
     {
         Name,
         Sename,
@@ -160,7 +162,9 @@ namespace AutoGeneratorSQL
         Street,
         Company,
         Position,
-        Date
+        Date,
+        Money
+
 
     }
 }

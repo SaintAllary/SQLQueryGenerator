@@ -143,7 +143,7 @@ namespace AutoGeneratorSQL
             foreach (var item in s.Document.Blocks)
             {
                 bool f = false;
-                foreach (var inneritem in Enum.GetNames(typeof(Category)))
+                foreach (var inneritem in Enum.GetNames(typeof(BasicSyntax)))
                 {
 
                     TextManipulation.FromTextPointer(item.ContentStart, item.ContentEnd, inneritem, item.FontStyle, FontWeights.Bold, Brushes.Blue, item.Background, item.FontSize);
