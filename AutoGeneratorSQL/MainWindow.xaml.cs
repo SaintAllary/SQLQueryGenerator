@@ -282,7 +282,7 @@ namespace AutoGeneratorSQL
                     CustomTextBox.Text = "";
                 }
                 else
-                    throw new Exception("---Invalid value---\nAll letters and not repeated\nNeed more than {ruleMoreThan}\nLess than {ruleLess}");
+                    throw new Exception($"---Invalid value---\n[All letters]\n[Need more than {ruleMoreThan}]\n[Less than {ruleLess}]\n[Not repeated]");
             }
             catch (Exception ex)
             {
