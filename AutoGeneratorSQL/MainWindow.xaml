@@ -92,15 +92,16 @@
                             <RowDefinition Height="29*"/>
                             <RowDefinition Height="8*"/>
                         </Grid.RowDefinitions>
-
+                        <TextBox Height="25" x:Name="TableNameBox" Margin="0,72,0,0" materialDesign:HintAssist.Hint="Table name" HorizontalContentAlignment="Center"></TextBox>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="Button_Click_3" Grid.RowSpan="2" Margin="140,0,0,0">Clear log</Button>
 
                         <Grid  HorizontalAlignment="Stretch" Height="19" Width="150" VerticalAlignment="Bottom" Margin="0,0,132,0" Grid.RowSpan="2" >
+                           
                             <TextBlock Text="Full" Width="55" HorizontalAlignment="Left" Foreground="{StaticResource PrimaryHueMidBrush}" Margin="10,0,0,0"></TextBlock>
-                            <ToggleButton HorizontalAlignment="Right" Width="58" Margin="0,0,68,0" Padding="0"></ToggleButton>
+                            <ToggleButton Name="DoesFullRequestToggle"  HorizontalAlignment="Right" Width="58" Margin="0,0,68,0" Padding="0"></ToggleButton>
                         </Grid>
 
-                        <Slider Name="SliderPercent" Value="100" Maximum="100" Minimum="0" TickFrequency="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,67,0,0" ValueChanged="WriteToLOG"/>
+                        <Slider Name="SliderPercent" Value="100" Maximum="100" Minimum="0" TickFrequency="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,49,0,0" ValueChanged="WriteToLOG"/>
 
                     </Grid>
                 </GroupBox>

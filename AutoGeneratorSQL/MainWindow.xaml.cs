@@ -81,18 +81,34 @@ namespace AutoGeneratorSQL
             try
             {
                 var s = new TextRange(QueryRTB.Document.ContentStart, QueryRTB.Document.ContentEnd).Text;
-                List<string> words = new List<string>();
 
-                foreach (var item in (DataContext as ViewModel).Syntaxes)
+
+             
+                var values = SyntaxTranscriptor.Transcript(s, Convert.ToInt32((SliderPercent.Value)));
+
+                if (values.Length >= 1)
+                    values = values.Substring(0, values.Length - 1);
+
+
+                if (DoesFullRequestToggle.IsChecked.Value)
                 {
-                    words.Add(item.Word);
+                    if (!TableNameBox.Text.All(x=>char.IsLetter(x)) || TableNameBox.Text.Length<=3)
+                    {
+                        throw new Exception("Table name must be:\n1)Not less than 3 letters\n2)Only letters");
+                    }
+                    List<string> vs = new List<string>();
+                    foreach (var item in (DataContext as ViewModel).Syntaxes)
+                    {
+                        vs.Add(item.Word);
+                    }
+                   values =  SyntaxTranscriptor.GetFullSecondPart(SyntaxTranscriptor.GetFullFirstPart(s, TableNameBox.Text, vs),values);
                 }
-            
-                OutPutBox.Text = SyntaxTranscriptor.Transcript(s, Convert.ToInt32((SliderPercent.Value)), words.ToArray());
+          
+
+                OutPutBox.Text = values;
 
                 if (OutPutBox.Text.Length - 1 > 0)
                 {
-                    OutPutBox.Text = OutPutBox.Text.Remove(OutPutBox.Text.Length - 1, 1);
 
                     HistoryOutput = OutPutBox.Text + "\n";
                 }
@@ -101,6 +117,7 @@ namespace AutoGeneratorSQL
             {
 
                 LogBox.Text += ex.Message + "\n";
+                ScrollLog();
             }
 
 
@@ -137,6 +154,7 @@ namespace AutoGeneratorSQL
 
             }
 
+
             //custom
             foreach (var item in s.Document.Blocks)
             {
@@ -154,6 +172,8 @@ namespace AutoGeneratorSQL
 
             TextManipulation.FromTextPointer(s.Document.ContentStart, s.Document.ContentEnd, " ", new FontStyle(), FontWeights.Normal, Brushes.Black, null, 12);
         }
+
+     
 
         private void QueryModule()
         {
@@ -239,6 +259,11 @@ namespace AutoGeneratorSQL
         private void WriteToLOG(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             LogBox.Text += $"Use {Convert.ToInt32(e.NewValue)}% of data\n";
+            ScrollLog();
+        }
+
+        private void ScrollLog()
+        {
             LogBox.SelectionStart = OutputHistory.Text.Length;
             LogBox.ScrollToEnd();
         }

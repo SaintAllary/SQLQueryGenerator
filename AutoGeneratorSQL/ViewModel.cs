@@ -13,7 +13,6 @@ namespace AutoGeneratorSQL
 {
     class ViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<string> Category { get; set; }
 
         public ObservableCollection<Syntax> Syntaxes { get; set; }
 
@@ -32,23 +31,6 @@ namespace AutoGeneratorSQL
             get { return timerInterval; }
             set { timerInterval = value; OnPropertyChanged("TimerInterval"); }
         }
-
-
-        private int rangeFrom;
-        public int RangeFrom
-        {
-            get { return rangeFrom; }
-            set { rangeFrom = value; OnPropertyChanged("RangeFrom"); }
-        }
-        private int rangeTo;
-
-        public int RangeTo
-        {
-            get { return rangeTo; }
-            set { rangeTo = value; OnPropertyChanged("RangeTo"); }
-        }
-
-
         #endregion
 
 
@@ -56,22 +38,18 @@ namespace AutoGeneratorSQL
         {
             try
             {
-                Category = new ObservableCollection<string>();
+
 
                 Syntaxes = new ObservableCollection<Syntax>();
 
                 foreach (var item in File.ReadAllLines(Properties.Resources.CustomSyntaxesPath))
-                {
                     Syntaxes.Add(new Syntax() { Word=  item });
-                }
              
 
 
-                foreach (var item in Enum.GetNames(typeof(Category)).ToList())
-                    Category.Add(item);
 
-                RangeTo = 10;
-                TimerInterval = 1000;
+
+                TimerInterval = 500;
             }
             catch (Exception EX)
             {
