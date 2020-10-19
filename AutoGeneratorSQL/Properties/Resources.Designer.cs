@@ -97,38 +97,20 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid table name:.
+        /// </summary>
+        internal static string InvalidTableNameEx {
+            get {
+                return ResourceManager.GetString("InvalidTableNameEx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid value.
         /// </summary>
         internal static string InvalidValueException {
             get {
                 return ResourceManager.GetString("InvalidValueException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to City.txt.
-        /// </summary>
-        internal static string PathToCities {
-            get {
-                return ResourceManager.GetString("PathToCities", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Company.txt.
-        /// </summary>
-        internal static string PathToCompanies {
-            get {
-                return ResourceManager.GetString("PathToCompanies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Country.txt.
-        /// </summary>
-        internal static string PathToCountries {
-            get {
-                return ResourceManager.GetString("PathToCountries", resourceCulture);
             }
         }
         
@@ -165,60 +147,6 @@ namespace AutoGeneratorSQL.Properties {
         internal static string PathToFileWithLog {
             get {
                 return ResourceManager.GetString("PathToFileWithLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.txt.
-        /// </summary>
-        internal static string PathToNames {
-            get {
-                return ResourceManager.GetString("PathToNames", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Operator.txt.
-        /// </summary>
-        internal static string PathToOperator {
-            get {
-                return ResourceManager.GetString("PathToOperator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phone.txt.
-        /// </summary>
-        internal static string PathToOperatorCode {
-            get {
-                return ResourceManager.GetString("PathToOperatorCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Position.txt.
-        /// </summary>
-        internal static string PathToPosition {
-            get {
-                return ResourceManager.GetString("PathToPosition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sename.txt.
-        /// </summary>
-        internal static string PathToSenames {
-            get {
-                return ResourceManager.GetString("PathToSenames", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Street.txt.
-        /// </summary>
-        internal static string PathToStreets {
-            get {
-                return ResourceManager.GetString("PathToStreets", resourceCulture);
             }
         }
         

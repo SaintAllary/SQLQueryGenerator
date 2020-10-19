@@ -92,8 +92,11 @@ namespace AutoGeneratorSQL
 
                 if (DoesFullRequestToggle.IsChecked.Value)
                 {
-                    if (!TableNameBox.Text.All(x=>char.IsLetter(x)) || TableNameBox.Text.Length<=3)
-                        throw new Exception(Properties.Resources.ExceptionNameRule);
+                    int ruleMoreValue = 3;
+                    int ruleLessValue = 15;
+                    if (!TableNameBox.Text.All(x=>char.IsLetter(x)) || TableNameBox.Text.Length<= ruleMoreValue || TableNameBox.Text.Length > ruleLessValue)
+                        throw new Exception($"{Properties.Resources.InvalidTableNameEx}\n[{Properties.Resources.RuleMoreThanException} {ruleMoreValue}]\n[{Properties.Resources.RuleLessThanException} {ruleLessValue}]");
+
 
 
                     List<string> vs = new List<string>();
@@ -284,7 +287,7 @@ namespace AutoGeneratorSQL
                 else
                     throw new Exception($"---{Properties.Resources.InvalidValueException}---" +
                         $"\n[{Properties.Resources.RuleAllLettersException}]\n[{Properties.Resources.RuleMoreThanException} {ruleMoreThan}]\n" +
-                        $"[{Properties.Resources.RuleLessThanException} {ruleLess}]\n[{Properties.Resources.RuleNotRepeatedException}]");
+                        $"[{Properties.Resources.RuleLessThanException} {ruleLess}]\n[{Properties.Resources.RuleNotRepeatedException}]\n");
             }
             catch (Exception ex)
             {
