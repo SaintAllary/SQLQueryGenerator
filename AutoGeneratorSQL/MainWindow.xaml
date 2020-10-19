@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SQL Data generator" AllowsTransparency="True" Height="600" Width="1100" MinWidth="1100" MinHeight="600" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown" Icon="e59350d7e25b233d5024eb227e0d86df.png">
-    
+
     <Window.Resources>
 
         <Storyboard x:Key="AnimateLeftBar" >
@@ -17,8 +17,8 @@
         </Storyboard>
 
         <Storyboard x:Key="BackAnimateLeftBar"  >
-            <ThicknessAnimation Storyboard.Target="{Binding ElementName=LeftBar}"   Storyboard.TargetProperty="Margin" Duration="0:0:0.1" To="0,0,0,0" AutoReverse="False" />
-            <DoubleAnimation Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Width" Duration="0:0:0.1" To="0" AutoReverse="False" />
+            <ThicknessAnimation Storyboard.Target="{Binding ElementName=LeftBar}"   Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,0,0" AutoReverse="False" />
+            <DoubleAnimation Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="0" AutoReverse="False" />
             <DoubleAnimation  Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Opacity"  From="1" To="0" Duration="0:0:0.1" AutoReverse="False"  />
         </Storyboard>
 
@@ -41,7 +41,7 @@
         </Style>
 
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -98,30 +98,31 @@
         </materialDesign:Card>
 
         <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60"  Padding="16">
-            <DockPanel>
-                <Button  Name ="MenuButton"  Padding="0"  Margin="-20,-10" Style="{StaticResource MenuButton}" Width="63"  >
-                    <materialDesign:PackIcon Kind="Menu" Width="35" Height="35" ></materialDesign:PackIcon>
+            <Grid>
+                <Button  Name ="MenuButton"  Padding="0"  Margin="-5,0,0,0" Style="{StaticResource MenuButton}" Width="45"  HorizontalAlignment="Left" Height="Auto" RenderTransformOrigin="0.378,0.579" >
+                    <materialDesign:PackIcon Kind="Menu" Width="27" Height="27" ></materialDesign:PackIcon>
                 </Button>
-                <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,10,0" Click="ExitProgram" VerticalAlignment="Center"  DockPanel.Dock="Right" />
-                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True" Width="992">
+                <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,0,0" Click="ExitProgram" VerticalAlignment="Center"  HorizontalAlignment="Right" />
 
-                    <materialDesign:ColorZone Mode="Standard"  CornerRadius="2"  Panel.ZIndex="1"  Margin="16 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                        <Grid Width="200">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto" />
-                                <ColumnDefinition  Width="*" />
-                                <ColumnDefinition  Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="CustomTextBox"    Grid.Column="1"  Margin="8 0 0 0"   materialDesign:HintAssist.Hint="Your custom query"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"    BorderThickness="0"  MinWidth="200"  VerticalAlignment="Center" />
-                            <Button  Style="{DynamicResource MaterialDesignToolButton}"    Grid.Column="2">
-                            </Button>
-                        </Grid>
-                    </materialDesign:ColorZone>
-                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Content="Generate" Click="GenerateCustom" Margin="8 0 0 0" Panel.ZIndex="0">
 
-                    </Button>
-                </StackPanel>
-            </DockPanel>
+                <materialDesign:ColorZone HorizontalAlignment="Left"  Mode="Standard"  Width="150"  CornerRadius="2"   Margin="45 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <Grid HorizontalAlignment="Stretch" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="Auto" />
+                            <ColumnDefinition  Width="*" />
+                            <ColumnDefinition  Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="CustomTextBox"    Grid.Column="1"  Margin="0,0,40,0"   materialDesign:HintAssist.Hint="Your custom query"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  
+                                     BorderThickness="0"   />
+                        <Button  Style="{DynamicResource MaterialDesignToolButton}"    Grid.Column="2">
+                        </Button>
+                    </Grid>
+                </materialDesign:ColorZone>
+                <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Content="Generate" Click="GenerateCustom" HorizontalAlignment="Left" Margin="200,-2,0,-2" Panel.ZIndex="0">
+
+                </Button>
+
+            </Grid>
         </materialDesign:ColorZone>
         <GroupBox  Style="{DynamicResource MaterialDesignCardGroupBox}" x:Name="QueryGroup" Grid.ColumnSpan="2" Grid.Column="0" Margin="2,62,2,2"    Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Header="Query Transcriptor">
             <GroupBox.HeaderTemplate>
