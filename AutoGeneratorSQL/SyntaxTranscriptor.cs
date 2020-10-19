@@ -151,14 +151,11 @@ namespace AutoGeneratorSQL
                 var s = item.Trim();
    
                 if (Enum.IsDefined(typeof(BasicSyntax), s) || customWords.Contains(s))
-                {
                     tmp += $"[{s}],";
 
-                }
             }
-           tmp = tmp.Substring(0, tmp.Length - 1);
 
-            return tmp;
+            return tmp.Substring(0, tmp.Length - 1);
         }
   
 
