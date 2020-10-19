@@ -7,36 +7,41 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SQL Data generator" AllowsTransparency="True" Height="600" Width="1100" MinWidth="1100" MinHeight="600" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown" Icon="e59350d7e25b233d5024eb227e0d86df.png">
+    
     <Window.Resources>
 
-        <Style x:Key="MenuButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconForegroundButton}" >
-        </Style>
+        <Storyboard x:Key="AnimateLeftBar" >
+            <ThicknessAnimation Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,70,0" AutoReverse="False" />
+            <DoubleAnimation Storyboard.Target="{Binding ElementName=LeftBar}"   Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="150" AutoReverse="False" />
+            <DoubleAnimation  Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Opacity"  From="0" To="1" Duration="0:0:0.1" AutoReverse="False"  />
+        </Storyboard>
 
-        <Style x:Key="Animation" TargetType="materialDesign:Card">
+        <Storyboard x:Key="BackAnimateLeftBar"  >
+            <ThicknessAnimation Storyboard.Target="{Binding ElementName=LeftBar}"   Storyboard.TargetProperty="Margin" Duration="0:0:0.1" To="0,0,0,0" AutoReverse="False" />
+            <DoubleAnimation Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Width" Duration="0:0:0.1" To="0" AutoReverse="False" />
+            <DoubleAnimation  Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Opacity"  From="1" To="0" Duration="0:0:0.1" AutoReverse="False"  />
+        </Storyboard>
+
+        <Style x:Key="MenuButton" TargetType="Button"  BasedOn="{StaticResource MaterialDesignIconForegroundButton}">
             <Style.Triggers>
-
-                <EventTrigger RoutedEvent="materialDesign:Card.MouseEnter">
-                    <BeginStoryboard x:Name="Story_True">
-                        <Storyboard>
-                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,70,0" AutoReverse="False" />
-                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="150" AutoReverse="False" />
-                            <DoubleAnimation  Storyboard.TargetProperty="Opacity"  From="0" To="1" Duration="0:0:0.1" AutoReverse="False"  />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="materialDesign:Card.MouseLeave">
-                    <BeginStoryboard x:Name="Story_false">
-                        <Storyboard>
-                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,0,0" AutoReverse="False" />
-                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="1" AutoReverse="False" />
-                            <DoubleAnimation  Storyboard.TargetProperty="Opacity"  From="1" To="0" Duration="0:0:0.1" AutoReverse="False"  />
-                        </Storyboard>
+                <EventTrigger RoutedEvent="Click">
+                    <BeginStoryboard x:Name="Story_True"  Storyboard="{StaticResource AnimateLeftBar}">
                     </BeginStoryboard>
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-      
+
+        <Style TargetType="materialDesign:ColorZone" >
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard x:Name="Story_false" Storyboard="{StaticResource BackAnimateLeftBar}">
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -44,9 +49,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions></Grid.RowDefinitions>
 
-        <materialDesign:Card UniformCornerRadius="0" Background="{DynamicResource PrimaryHueMidBrush  }" Margin="0,0,0,0" Opacity="0" HorizontalAlignment="Left" Width="7" 
-                             VerticalAlignment="Stretch" Panel.ZIndex="1" Style="{StaticResource Animation}"  >
-            
+        <materialDesign:Card UniformCornerRadius="0" x:Name="LeftBar"  Background="{DynamicResource PrimaryHueMidBrush  }" Margin="0,0,0,0" Opacity="0" HorizontalAlignment="Left" Width="0" 
+                             VerticalAlignment="Stretch" Panel.ZIndex="1" >
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.07*"></RowDefinition>
@@ -54,7 +59,7 @@
                     <RowDefinition Height="0.07*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <ListBox Grid.Row="1" ItemsSource="{Binding BasicSyntaxes}" Padding="0">
 
                     <ListBox.ItemTemplate>
@@ -75,30 +80,30 @@
                 <TextBlock Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Bold" Background="Transparent" Grid.Row="0"  TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">Basic:</TextBlock>
                 <TextBlock Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Bold" Background="Transparent" Grid.Row="2"  TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">Custom:</TextBlock>
                 <ListBox Grid.Row="3" ItemsSource="{Binding Syntaxes}" Padding="0">
-                
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch" >
 
-                            <TextBlock Margin="-5,0,0,0" Padding="0" HorizontalAlignment="Stretch" Text="{Binding Path=Word}" Style="{StaticResource MaterialDesignTextBlock}" 
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch" >
+
+                                <TextBlock Margin="-5,0,0,0" Padding="0" HorizontalAlignment="Stretch" Text="{Binding Path=Word}" Style="{StaticResource MaterialDesignTextBlock}" 
                                        Background="Transparent" Foreground="{Binding Path=Brush}"></TextBlock>
-                        </Grid>
+                            </Grid>
 
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
 
-            </ListBox>
+
+                </ListBox>
             </Grid>
         </materialDesign:Card>
 
         <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60"  Padding="16">
             <DockPanel>
-                <Button   Padding="0"  Margin="-20" Style="{StaticResource MenuButton}" >
+                <Button  Name ="MenuButton"  Padding="0"  Margin="-20,-10" Style="{StaticResource MenuButton}" Width="63"  >
                     <materialDesign:PackIcon Kind="Menu" Width="35" Height="35" ></materialDesign:PackIcon>
                 </Button>
                 <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,10,0" Click="ExitProgram" VerticalAlignment="Center"  DockPanel.Dock="Right" />
-                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
+                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True" Width="992">
 
                     <materialDesign:ColorZone Mode="Standard"  CornerRadius="2"  Panel.ZIndex="1"  Margin="16 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <Grid Width="200">
