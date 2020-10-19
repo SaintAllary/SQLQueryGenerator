@@ -22,7 +22,8 @@
             <DoubleAnimation  Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Opacity"  From="1" To="0" Duration="0:0:0.1" AutoReverse="False"  />
         </Storyboard>
 
-        <Style x:Key="MenuButton" TargetType="Button"  BasedOn="{StaticResource MaterialDesignIconForegroundButton}">
+        <Style x:Key="MenuButton" TargetType="Button"  BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
+      
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Click">
                     <BeginStoryboard x:Name="Story_True"  Storyboard="{StaticResource AnimateLeftBar}">
@@ -99,8 +100,10 @@
 
         <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Height="60"  Padding="16">
             <Grid>
-                <Button  Name ="MenuButton"  Padding="0"  Margin="-5,0,0,0" Style="{StaticResource MenuButton}" Width="45"  HorizontalAlignment="Left" Height="Auto" RenderTransformOrigin="0.378,0.579" >
+                <Button Name ="MenuButton"  Padding="0"  Margin="-5,0,0,0" Style="{StaticResource MenuButton}" Width="45"  HorizontalAlignment="Left" 
+                        Height="Auto"  RenderTransformOrigin="0.378,0.579" >
                     <materialDesign:PackIcon Kind="Menu" Width="27" Height="27" ></materialDesign:PackIcon>
+                  
                 </Button>
                 <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,0,0" Click="ExitProgram" VerticalAlignment="Center"  HorizontalAlignment="Right" />
 
