@@ -39,7 +39,7 @@ namespace AutoGeneratorSQL
             {
                 var year = GetNextRnd(1975, 2004);
                 var month = GetNextRnd(1, 13);
-                return $"{year}.{month}.{GetNextRnd(0, DateTime.DaysInMonth(year, month))}";
+                return $"'{year}.{month}.{GetNextRnd(0, DateTime.DaysInMonth(year, month))}'";
             }
             else if (category == BasicSyntax.Phone.ToString())
             {
