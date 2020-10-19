@@ -19,10 +19,6 @@ namespace AutoGeneratorSQL
 
         public ObservableCollection<Syntax> BasicSyntaxes { get; set; }
 
-
-
-
-
         #region Propfull
 
 
