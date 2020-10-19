@@ -9,6 +9,9 @@
         Title="SQL Data generator" AllowsTransparency="True" Height="600" Width="1100" MinWidth="1100" MinHeight="600" ResizeMode="CanResizeWithGrip" WindowStyle="None" MouseDown="Window_MouseDown" Icon="e59350d7e25b233d5024eb227e0d86df.png">
 
     <Window.Resources>
+        
+        
+        
 
         <Storyboard x:Key="AnimateLeftBar" >
             <ThicknessAnimation Storyboard.Target="{Binding ElementName=LeftBar}"  Storyboard.TargetProperty="Margin" Duration="0:0:0.2" To="0,0,70,0" AutoReverse="False" />
