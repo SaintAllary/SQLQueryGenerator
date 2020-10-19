@@ -167,7 +167,7 @@ namespace AutoGeneratorSQL
     enum BasicSyntax
     {
         Name,
-        Sername,
+        Surname,
         Age,
         Phone,
         Operator,
