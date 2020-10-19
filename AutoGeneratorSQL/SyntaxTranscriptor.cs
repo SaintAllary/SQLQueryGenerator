@@ -143,10 +143,9 @@ namespace AutoGeneratorSQL
         }
 
         #region Full transcriptor
-        public static string GetFullFirstPart(string sourceString, string currentTable, List<string>customWords)
+        public static string GetFullFirstPart(string sourceString,  List<string>customWords)
         {
-            string tmp = $"INSERT INTO [{currentTable}] (";
-                   
+            string tmp = string.Empty;
             foreach (var item in sourceString.Split(SyntaxSeparator))
             {
                 var s = item.Trim();
@@ -158,11 +157,14 @@ namespace AutoGeneratorSQL
                 }
             }
            tmp = tmp.Substring(0, tmp.Length - 1);
-            tmp += ") VALUES "; ;
+
             return tmp;
         }
-        public static string GetFullSecondPart(string firstPart, string values) => firstPart + $"({values});";
+  
 
+        public static string GetFullInsertQuery(string sourceString, string currentTable, List<string> customWords,string values)=>
+            $"INSERT INTO [{currentTable}] ({GetFullFirstPart(sourceString,customWords)}) VALUES ({values})";
+      
         #endregion
     }
     enum BasicSyntax

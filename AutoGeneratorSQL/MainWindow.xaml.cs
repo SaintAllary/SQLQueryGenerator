@@ -101,7 +101,7 @@ namespace AutoGeneratorSQL
                     {
                         vs.Add(item.Word);
                     }
-                   values =  SyntaxTranscriptor.GetFullSecondPart(SyntaxTranscriptor.GetFullFirstPart(s, TableNameBox.Text, vs),values);
+                   values =  SyntaxTranscriptor.GetFullInsertQuery(s, TableNameBox.Text, vs,values);
                 }
           
 
