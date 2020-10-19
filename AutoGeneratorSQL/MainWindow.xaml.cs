@@ -270,7 +270,7 @@ namespace AutoGeneratorSQL
         private void GenerateCustom(object sender, RoutedEventArgs e)
         {
 
-            int ruleLess = 10;
+            int ruleLess = 18;
             int ruleMoreThan = 3;
             try
             {
@@ -282,7 +282,9 @@ namespace AutoGeneratorSQL
                     CustomTextBox.Text = "";
                 }
                 else
-                    throw new Exception($"---Invalid value---\n[All letters]\n[Need more than {ruleMoreThan}]\n[Less than {ruleLess}]\n[Not repeated]");
+                    throw new Exception($"---{Properties.Resources.InvalidValueException}---" +
+                        $"\n[{Properties.Resources.RuleAllLettersException}]\n[{Properties.Resources.RuleMoreThanException} {ruleMoreThan}]\n" +
+                        $"[{Properties.Resources.RuleLessThanException} {ruleLess}]\n[{Properties.Resources.RuleNotRepeatedException}]");
             }
             catch (Exception ex)
             {

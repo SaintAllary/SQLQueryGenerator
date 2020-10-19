@@ -70,6 +70,15 @@ namespace AutoGeneratorSQL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FillYourCustomFile.
+        /// </summary>
+        internal static string CustonFileEmptyException {
+            get {
+                return ResourceManager.GetString("CustonFileEmptyException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table name must be: 1)Not less than 3 letters 2)Only letters.
         /// </summary>
         internal static string ExceptionNameRule {
@@ -84,6 +93,15 @@ namespace AutoGeneratorSQL.Properties {
         internal static string Formatter {
             get {
                 return ResourceManager.GetString("Formatter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid value.
+        /// </summary>
+        internal static string InvalidValueException {
+            get {
+                return ResourceManager.GetString("InvalidValueException", resourceCulture);
             }
         }
         
@@ -210,6 +228,42 @@ namespace AutoGeneratorSQL.Properties {
         internal static string PathToSyntax {
             get {
                 return ResourceManager.GetString("PathToSyntax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only letters.
+        /// </summary>
+        internal static string RuleAllLettersException {
+            get {
+                return ResourceManager.GetString("RuleAllLettersException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Less than.
+        /// </summary>
+        internal static string RuleLessThanException {
+            get {
+                return ResourceManager.GetString("RuleLessThanException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need more than.
+        /// </summary>
+        internal static string RuleMoreThanException {
+            get {
+                return ResourceManager.GetString("RuleMoreThanException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not repeated.
+        /// </summary>
+        internal static string RuleNotRepeatedException {
+            get {
+                return ResourceManager.GetString("RuleNotRepeatedException", resourceCulture);
             }
         }
         

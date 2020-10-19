@@ -54,17 +54,6 @@ namespace AutoGeneratorSQL
             if (string.IsNullOrEmpty(keyword)) throw new ArgumentNullException(keyword);
 
 
-
-
-
-
-
-
-
-
-
-
-
             TextRange text = new TextRange(startPointer, endPointer);
             TextPointer current = text.Start.GetInsertionPosition(LogicalDirection.Forward);
             while (current != null)

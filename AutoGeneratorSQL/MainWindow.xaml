@@ -105,20 +105,19 @@
                 <Button  Content="Exit" Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="0,0,0,0" Click="ExitProgram" VerticalAlignment="Center"  HorizontalAlignment="Right" />
 
 
-                <materialDesign:ColorZone HorizontalAlignment="Left"  Mode="Standard"  Width="150"  CornerRadius="2"   Margin="45 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <materialDesign:ColorZone HorizontalAlignment="Left" Height="27"  Mode="Standard"  Width="150"  CornerRadius="2"   Margin="45 0 0 0"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
                     <Grid HorizontalAlignment="Stretch" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition  Width="Auto" />
+                    
                             <ColumnDefinition  Width="*" />
-                            <ColumnDefinition  Width="Auto" />
+                 
                         </Grid.ColumnDefinitions>
-                        <TextBox HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="CustomTextBox"    Grid.Column="1"  Margin="0,0,40,0"   materialDesign:HintAssist.Hint="Your custom query"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  
+                        <TextBox HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" x:Name="CustomTextBox"    Grid.Column="1"     materialDesign:HintAssist.Hint="Your custom query"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  
                                      BorderThickness="0"   />
-                        <Button  Style="{DynamicResource MaterialDesignToolButton}"    Grid.Column="2">
-                        </Button>
+              
                     </Grid>
                 </materialDesign:ColorZone>
-                <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Content="Generate" Click="GenerateCustom" HorizontalAlignment="Left" Margin="200,-2,0,-2" Panel.ZIndex="0">
+                <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Content="Generate" Click="GenerateCustom" HorizontalAlignment="Left" Margin="210,-2,0,-2" Panel.ZIndex="0">
 
                 </Button>
 
@@ -155,7 +154,7 @@
                     </Grid>
                 </GroupBox>
 
-                <TextBox x:Name="LogBox" x:FieldModifier="public" Width="245" Block.LineHeight="0.1"  HorizontalAlignment="Right" VerticalAlignment="Stretch"  Margin="0,369,5,20"></TextBox>
+                <TextBox VerticalContentAlignment="Center" x:Name="LogBox" x:FieldModifier="public" Width="245" Block.LineHeight="0.1"  HorizontalAlignment="Right" VerticalAlignment="Stretch"  Margin="0,369,4,20"></TextBox>
                 <Grid HorizontalAlignment="Stretch" Margin="0,0,260,0" VerticalAlignment="Stretch">
                     <RichTextBox materialDesign:HintAssist.Hint="Your query" Name="QueryRTB"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,10,0,0" TextChanged="RichTextBox_TextChanged" AcceptsReturn="False"></RichTextBox>
                     <TextBox  materialDesign:HintAssist.Hint="Output value"  Name="OutPutBox" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="10,40,0,0"></TextBox>

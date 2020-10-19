@@ -19,7 +19,12 @@ namespace AutoGeneratorSQL
             SyntaxSeparator = ',';
         }
 
-
+        /// <summary>
+        /// correct random
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         private static int GetNextRnd(int min, int max)
         {
             byte[] rndBytes = new byte[4];
@@ -30,6 +35,13 @@ namespace AutoGeneratorSQL
             Decimal NewValue = ((Decimal)rand - (Decimal)int.MinValue) / OldRange * NewRange + (Decimal)min;
             return (int)NewValue;
         }
+
+        /// <summary>
+        /// With special cases
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="percent"></param>
+        /// <returns></returns>
         public static string GetBasicTranscription(string category, int percent)
         {
             #region special cases
@@ -57,6 +69,13 @@ namespace AutoGeneratorSQL
 
             return GetBasicCategory(category, percent);
         }
+
+        /// <summary>
+        /// Any Transcription
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="percent"></param>
+        /// <returns></returns>
         public static string Transcript(string source, int percent)
         {
             string final = string.Empty;
@@ -73,7 +92,7 @@ namespace AutoGeneratorSQL
                     {
                         if (File.ReadAllLines(Properties.Resources.PathToCustomDir + "\\" + trimmed + Properties.Resources.Formatter).Length == 0)
                         {
-                            throw new Exception($"Fill your custom file: {trimmed}");
+                            throw new Exception($"{Properties.Resources.CustonFileEmptyException}: {trimmed}");
                         }
                         final += $"{GetCustomCategory(trimmed, percent)},";
                     }
@@ -83,11 +102,22 @@ namespace AutoGeneratorSQL
 
             return final;
         }
+
+        /// <summary>
+        /// Check does syntax exist as custom or basic
+        /// </summary>
+        /// <param name="CustomWord"></param>
+        /// <returns></returns>
         public static bool DoesAnySyntaxExist(string CustomWord) => Enum.IsDefined(typeof(BasicSyntax), CustomWord);
+
+        /// <summary>
+        /// Get value from custom word
+        /// </summary>
+        /// <param name="categoryName"></param>
+        /// <param name="percent"></param>
+        /// <returns></returns>
         private static string GetCustomCategory(string categoryName, int percent)
         {
-            Random random = new Random();
-
             var path = Properties.Resources.PathToCustomDir + "\\" + categoryName + Properties.Resources.Formatter;
 
             var s = File.ReadAllLines(path);
@@ -103,7 +133,6 @@ namespace AutoGeneratorSQL
 
         }
 
-        #region General transcriptor
         private static string GetBasicCategory(string categoryName, int percent)
         {
             var s = File.ReadAllLines(Properties.Resources.PathToDirBasic+"\\" +categoryName + Properties.Resources.Formatter);
@@ -111,9 +140,9 @@ namespace AutoGeneratorSQL
             double t = (Convert.ToDouble((s.Length)) / 100) * percent;
 
             return $"'{s[GetNextRnd(0, Convert.ToInt32(t))]}'";
-
-
         }
+
+        #region Full transcriptor
         public static string GetFullFirstPart(string sourceString, string currentTable, List<string>customWords)
         {
             string tmp = $"INSERT INTO [{currentTable}] (";

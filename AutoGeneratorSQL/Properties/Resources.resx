@@ -120,11 +120,17 @@
   <data name="CustomSyntaxesPath" xml:space="preserve">
     <value>CustomSyntaxes.txt</value>
   </data>
+  <data name="CustonFileEmptyException" xml:space="preserve">
+    <value>FillYourCustomFile</value>
+  </data>
   <data name="ExceptionNameRule" xml:space="preserve">
     <value>Table name must be: 1)Not less than 3 letters 2)Only letters</value>
   </data>
   <data name="Formatter" xml:space="preserve">
     <value>.txt</value>
+  </data>
+  <data name="InvalidValueException" xml:space="preserve">
+    <value>Invalid value</value>
   </data>
   <data name="PathToCities" xml:space="preserve">
     <value>City.txt</value>
@@ -167,6 +173,18 @@
   </data>
   <data name="PathToSyntax" xml:space="preserve">
     <value>CustomSyntax</value>
+  </data>
+  <data name="RuleAllLettersException" xml:space="preserve">
+    <value>Only letters</value>
+  </data>
+  <data name="RuleLessThanException" xml:space="preserve">
+    <value>Less than</value>
+  </data>
+  <data name="RuleMoreThanException" xml:space="preserve">
+    <value>Need more than</value>
+  </data>
+  <data name="RuleNotRepeatedException" xml:space="preserve">
+    <value>Not repeated</value>
   </data>
   <data name="SplitterRuleChar" xml:space="preserve">
     <value>;</value>
