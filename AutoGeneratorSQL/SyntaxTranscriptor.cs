@@ -116,7 +116,7 @@ namespace AutoGeneratorSQL
         }
         public static string GetFullFirstPart(string sourceString, string currentTable, List<string>customWords)
         {
-            string tmp = $"INRSERT INTO [{currentTable}] (";
+            string tmp = $"INSERT INTO [{currentTable}] (";
                    
             foreach (var item in sourceString.Split(SyntaxSeparator))
             {
