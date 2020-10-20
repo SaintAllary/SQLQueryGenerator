@@ -51,14 +51,14 @@ namespace AutoGeneratorSQL
             {
                 var year = GetNextRnd(1975, 2004);
                 var month = GetNextRnd(1, 13);
-                return $"'{year}.{month}.{GetNextRnd(0, DateTime.DaysInMonth(year, month))}'";
+                return $"'{year}.{month}.{GetNextRnd(1, DateTime.DaysInMonth(year, month))}'";
             }
             else if (category == BasicSyntax.Phone.ToString())
             {
-                var s = File.ReadAllLines(category + Properties.Resources.Formatter);
+                var s = File.ReadAllLines(Properties.Resources.PathToDirBasic+"\\" + category + Properties.Resources.Formatter);
                 double t = (Convert.ToDouble((s.Length - 1)) / 100) * percent;
 
-                var s1 = $"+{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}({s[GetNextRnd(0, Convert.ToInt32(t))]})" +
+                var s1 = $"{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{s[GetNextRnd(0, Convert.ToInt32(t))]}" +
                     $"{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}{GetNextRnd(0, 10)}";
                 return s1;
             }
@@ -160,7 +160,7 @@ namespace AutoGeneratorSQL
   
 
         public static string GetFullInsertQuery(string sourceString, string currentTable, List<string> customWords,string values)=>
-            $"INSERT INTO [{currentTable}] ({GetFullFirstPart(sourceString,customWords)}) VALUES ({values})";
+            $"INSERT INTO [{currentTable}] ({GetFullFirstPart(sourceString,customWords)}) VALUES ({values});";
       
         #endregion
     }
