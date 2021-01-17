@@ -1,6 +1,6 @@
 # SQLQueryGenerator
 
-Made this over weekends to optimize my work with SSMS (SQL Server)</br>
+[Made this over weekends to optimize my work with SSMS (SQL Server)]</br>
 It can generate insert queries with given parameters
 
 #SSMS #C# #WPF #XAML
