@@ -7,4 +7,4 @@
 {branch} — ветка репозитория;
 {path} — путь к месту нахождения картинки.
 
-![Image alt]https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/first.jpg
+![Image alt](https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/first.jpg)
