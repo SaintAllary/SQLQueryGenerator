@@ -3,7 +3,7 @@
 [Made this over weekends to optimize my work with SSMS (SQL Server)]</br>
 It can generate insert queries with given parameters
 
-#SSMS #C# #WPF #XAML
+#SSMS #C# #WPF #XAML #Mateterial Design
 
 .NET Framework 4.7.2 > 
 
