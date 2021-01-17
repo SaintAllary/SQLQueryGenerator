@@ -33,3 +33,5 @@ Interface: </br>
 -Big textlock (show all outputs)</br>
 
 ![Image alt](https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/first.jpg)
+![Image alt](https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/second.jpg)
+![Image alt](https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/third.jpg)
